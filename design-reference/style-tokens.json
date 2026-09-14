@@ -1,0 +1,221 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-09-12",
+  "scope": "AI 管家项目（包含事件详情五个 Demo）",
+  "references": [
+    {
+      "nodeId": "3:2",
+      "role": "智慧价格总览"
+    },
+    {
+      "nodeId": "1628:2687",
+      "role": "促销经营总览"
+    },
+    {
+      "nodeId": "2506:6559",
+      "role": "现场托管公司列表"
+    }
+  ],
+  "fileKey": "Z1fF5tD3nIiUdGaDqLYCLi",
+  "colors": {
+    "page": "#F0F2F5",
+    "surface": "#FFFFFF",
+    "metric": "#F3F5F7",
+    "primary": "#315EEF",
+    "primaryLight": "#EEF4FF",
+    "textPrimary": "#111827",
+    "textSecondary": "#344054",
+    "textMuted": "#667085",
+    "textWeak": "#98A2B3",
+    "textInactiveVariant": "#93A1BF",
+    "border": "#E6EBF2",
+    "positive": "#05B37F",
+    "danger": "#E21818",
+    "warning": "#FF6624",
+    "typePurple": "#9931EF",
+    "typePurpleLight": "#F5EEFF",
+    "filterInactive": "#F7F8FB"
+  },
+  "typography": {
+    "chineseFamily": "PingFang SC",
+    "bodyWeight": 400,
+    "titleWeight": 600,
+    "numberFamily": "Oswald",
+    "numberStyle": "SemiBold",
+    "numberWeight": 600,
+    "numberSizes": [
+      36,
+      24,
+      18,
+      14
+    ],
+    "moduleTitleSizes": [
+      18,
+      20
+    ],
+    "eventTitleSize": 16,
+    "bodySizes": [
+      13,
+      14
+    ],
+    "supportSize": 12,
+    "chartAuxFamilyVariant": "Inter",
+    "numberFontBundled": true,
+    "numberFontPath": "事件详情/assets/fonts/Oswald-SemiBold.woff2",
+    "numberCssClass": "metric-number"
+  },
+  "layout": {
+    "referenceWidth": 1920,
+    "topbarHeight": 60,
+    "sidebarWidth": 218,
+    "pagePadding": 12,
+    "sectionGap": 14,
+    "cardPadding": 16,
+    "innerGap": 8,
+    "metricPadding": 12,
+    "metricGap": 8,
+    "eventHeadingHeight": 50
+  },
+  "radius": {
+    "section": 16,
+    "metric": 10,
+    "metricVariant": 12,
+    "plan": 12,
+    "eventHeading": 12,
+    "button": 8,
+    "tag": 4,
+    "timeFilter": 52,
+    "segmentContainer": 10,
+    "segmentItem": 8,
+    "aiNote": 12
+  },
+  "components": {
+    "button": {
+      "height": 34,
+      "fontSize": 13,
+      "horizontalPadding": [
+        12,
+        16
+      ]
+    },
+    "timeFilter": {
+      "heightVariants": [
+        28,
+        30
+      ],
+      "horizontalPadding": 13
+    },
+    "tag": {
+      "height": 22,
+      "fillAlpha": 0.1,
+      "strokeAlpha": 0.3,
+      "strokeWidth": 1
+    },
+    "selectedCard": {
+      "fill": "#EEF4FF",
+      "border": "#315EEF",
+      "borderWidth": 1
+    },
+    "table": {
+      "headerFill": {
+        "color": "#315EEF",
+        "alpha": 0.06
+      },
+      "headerHeightObserved": 48.5,
+      "rowHeightObserved": 61,
+      "cellHorizontalPadding": 16,
+      "dividerWidth": 1
+    },
+    "segment": {
+      "heightObserved": 37,
+      "itemHeightObserved": 31,
+      "padding": 3,
+      "selectedShadow": "0 2px 6px rgb(0 0 0 / 5%)"
+    }
+  },
+  "aiNote": {
+    "sourceNodes": [
+      "1:278",
+      "1650:5808",
+      "2506:6843"
+    ],
+    "gradientStops": [
+      {
+        "at": 0,
+        "color": "#FF9124"
+      },
+      {
+        "at": 0.5336538553,
+        "color": "#FF1080"
+      },
+      {
+        "at": 1,
+        "color": "#42C4FF"
+      }
+    ],
+    "fillAlpha": 0.08,
+    "strokeAlpha": 1,
+    "strokeWidth": 1,
+    "padding": [
+      12,
+      14
+    ],
+    "narrowPadding": 12,
+    "gradientTransform": [
+      [
+        0.9748551249504089,
+        0.025144897401332855,
+        0
+      ],
+      [
+        -0.26042231917381287,
+        0.26042231917381287,
+        0.5
+      ]
+    ],
+    "cssAnglesObserved": [
+      100.1665,
+      92.0859,
+      99.5176
+    ]
+  },
+  "chartVariants": {
+    "price": {
+      "nodeId": "1:200",
+      "bar": "#DBE7FF",
+      "line": "#3B63E6",
+      "marker": "#FFA400",
+      "grid": "#EDF0F5",
+      "lineWidth": 3
+    },
+    "revenue": {
+      "nodeId": "4:324",
+      "bar": "#DBE7FF",
+      "line": "#05B37F",
+      "grid": "#EDF0F5",
+      "lineWidth": 3
+    },
+    "promotionBudget": {
+      "nodeId": "1650:4106",
+      "bar": "#DFE8FF",
+      "line": "#3D63F2",
+      "dashedLine": "#F59E0B",
+      "grid": "#EEF2F7",
+      "axis": "#DBE4F2"
+    },
+    "userOperations": {
+      "nodeId": "1650:4262",
+      "bar": "#DFE8FF",
+      "line": "#16A56B",
+      "dashedLine": "#F59E0B",
+      "grid": "#EEF2F7",
+      "axis": "#DBE4F2"
+    }
+  },
+  "notes": [
+    "同类组件优先复用；具体目标节点与用户最新要求优先。",
+    "颜色表达业务语义，不按涨跌符号自动分配。",
+    "角度、局部小数尺寸和字体行高按目标实例复核；不将所有源稿差异强制归一。",
+    "这些参数记录风格，不授权增加交互或改写业务流程。"
+  ]
+}

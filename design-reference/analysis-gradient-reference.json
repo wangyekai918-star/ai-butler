@@ -1,0 +1,127 @@
+{
+  "fileKey": "Z1fF5tD3nIiUdGaDqLYCLi",
+  "sourceNode": "2522:12415",
+  "verifiedAt": "2026-09-12",
+  "rawNodes": [
+    {
+      "id": "2522:12415",
+      "name": "Article",
+      "width": 1356,
+      "height": 930,
+      "fills": [],
+      "cornerRadius": 16,
+      "paddingTop": 0,
+      "paddingBottom": 0,
+      "paddingLeft": 0,
+      "paddingRight": 0
+    },
+    {
+      "id": "2522:12416",
+      "name": "Section",
+      "width": 1356,
+      "height": 92,
+      "fills": [
+        {
+          "type": "GRADIENT_LINEAR",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "gradientStops": [
+            {
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "position": 0.4993935227394104,
+              "boundVariables": {}
+            },
+            {
+              "color": {
+                "r": 0.9411764740943909,
+                "g": 0.9490196108818054,
+                "b": 0.9607843160629272,
+                "a": 1
+              },
+              "position": 1,
+              "boundVariables": {
+                "color": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:3:11"
+                }
+              }
+            }
+          ],
+          "gradientTransform": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              -287.3025207519531,
+              3.189698735716652e-14,
+              144.15126037597656
+            ]
+          ]
+        }
+      ],
+      "cornerRadius": 0,
+      "paddingTop": 12,
+      "paddingBottom": 24,
+      "paddingLeft": 12,
+      "paddingRight": 12
+    },
+    {
+      "id": "2522:12429",
+      "name": "Background",
+      "width": 1356,
+      "height": 2704,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "color": {
+            "r": 0.9411764740943909,
+            "g": 0.9490196108818054,
+            "b": 0.9607843160629272
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:3:11"
+            }
+          }
+        }
+      ],
+      "cornerRadius": 0,
+      "paddingTop": 0,
+      "paddingBottom": 12,
+      "paddingLeft": 0,
+      "paddingRight": 0
+    }
+  ],
+  "implementation": {
+    "direction": "180deg",
+    "colors": [
+      "#FFFFFF",
+      "#F0F2F5"
+    ],
+    "whiteStop": 0.4993935227394104,
+    "headerHeight": 60,
+    "whiteToGrayRange": [
+      16,
+      96
+    ],
+    "nestedWrapperRemoved": true,
+    "cardGap": 8,
+    "contentInset": 8,
+    "adjustmentSource": "用户要求标题上下留白对称，均为 16px；白色外框改为 1px。渐变结束位置保持 96px，子卡至父容器外沿仍为 8px。",
+    "whiteBorder": 1,
+    "headingToCardGap": 16,
+    "headingTopGap": 16
+  }
+}
