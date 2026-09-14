@@ -14,6 +14,19 @@ AI 管家各模块的高保真 UI Demo，供设计评审与开发参考。页面
 | 社会事件 | 在多个电站间切换，查看事件影响、决策执行评估与决策复盘。 | [在线演示](https://wangyekai918-star.github.io/ai-butler/%E4%BA%8B%E4%BB%B6%E8%AF%A6%E6%83%85/%E7%A4%BE%E4%BC%9A%E4%BA%8B%E4%BB%B6/%E7%A4%BE%E4%BC%9A%E4%BA%8B%E4%BB%B6.html) | [目录](./事件详情/社会事件/) |
 | 经营风险 · 通知决策 | 完成异常分析与通知决策，展示通知内容和发送结果。 | [在线演示](https://wangyekai918-star.github.io/ai-butler/%E4%BA%8B%E4%BB%B6%E8%AF%A6%E6%83%85/%E7%BB%8F%E8%90%A5%E9%A3%8E%E9%99%A9_%E9%80%9A%E7%9F%A5%E5%86%B3%E7%AD%96/%E7%BB%8F%E8%90%A5%E9%A3%8E%E9%99%A9_%E9%80%9A%E7%9F%A5%E5%86%B3%E7%AD%96.html) | [目录](./事件详情/经营风险_通知决策/) |
 
+## 充电安全
+
+安全看板、车辆防护、安全评估和防护预警共用一个 Demo，支持页签切换、筛选、分页与评估详情查看。
+
+| 页签 | 场景 | 在线演示 |
+| --- | --- | --- |
+| 安全看板 | 查看安全防护概览、AI防护趋势、实时明细与预警/阻断排名。 | [在线演示](https://wangyekai918-star.github.io/ai-butler/充电安全/充电安全.html?tab=safe) |
+| 车辆防护 | 查看车辆类型、健康状态和车型预警/阻断分布。 | [在线演示](https://wangyekai918-star.github.io/ai-butler/充电安全/充电安全.html?tab=vehicle) |
+| 安全评估 | 筛选车辆评估记录，查看指标得分及评估详情。 | [在线演示](https://wangyekai918-star.github.io/ai-butler/充电安全/充电安全.html?tab=evaluation) |
+| 防护预警 | 按级别、时间、订单筛选预警和已阻断记录。 | [在线演示](https://wangyekai918-star.github.io/ai-butler/充电安全/充电安全.html?tab=warn) |
+
+[查看充电安全源码与说明](./充电安全/)。页面使用虚拟车辆、订单和电站示例，本地运行交互，无需连接业务服务。
+
 ## 目录约定
 
 ```text
@@ -24,12 +37,13 @@ AI 管家/
 ├── AGENTS.md                  # AI 协作与项目开发约定
 ├── AI管家UI风格规范.md
 ├── design-reference/          # 公共风格依据与参数
-└── 事件详情/                  # 按业务模块归档
-    ├── 经营风险_调价策略/
-    ├── 经营风险_促销策略/
-    ├── 经营机会/
-    ├── 社会事件/
-    └── 经营风险_通知决策/
+├── 事件详情/                  # 事件详情模块
+│   ├── 经营风险_调价策略/
+│   ├── 经营风险_促销策略/
+│   ├── 经营机会/
+│   ├── 社会事件/
+│   └── 经营风险_通知决策/
+└── 充电安全/                  # 与事件详情同级，包含四个页签
 ```
 
 每个 Demo 独立维护一个 HTML、一个 `style.css`、一个 `app.js`、`README.md` 和 `assets/`。HTML、CSS、JS 同级存放，运行资源不跨 Demo 引用。

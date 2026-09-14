@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>充电安全 — AI 管家</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar" aria-label="AI 管家顶部导航">
+        <div class="topbar__left">
+          <div class="brand">
+            <img class="brand__logo" src="./assets/ai-butler-logo@3x.png" width="133" height="36" alt="AI管家 · 充电运营数字员工" draggable="false">
+          </div>
+          <div class="organization">
+            <span>示例运营公司</span>
+            <img class="icon icon--16" src="./assets/switch-app.svg" width="16" height="16" alt="" draggable="false">
+          </div>
+        </div>
+        <div class="topbar__right">
+          <div class="notification" aria-label="消息，2 条未读">
+            <img class="icon icon--22" src="./assets/notification.svg" width="22" height="22" alt="" draggable="false">
+            <span class="notification__badge" aria-hidden="true">2</span>
+          </div>
+          <span class="feedback">反馈</span>
+          <div class="user">
+            <span class="user__avatar" aria-hidden="true">运</span>
+            <span>运营人员</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="workspace">
+        <aside class="sidebar">
+          <nav aria-label="功能导航">
+            <!-- 本阶段仅展示导航外观，不提供点击、悬浮或键盘交互。 -->
+            <ul class="nav-list">
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-home.svg" width="18" height="18" alt="" draggable="false"><span>首页</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-ai-assistant.svg" width="18" height="18" alt="" draggable="false"><span>AI助理</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-diagnosis.svg" width="18" height="18" alt="" draggable="false"><span>经营诊断</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-price.svg" width="18" height="18" alt="" draggable="false"><span>智慧价格</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-promotion.svg" width="18" height="18" alt="" draggable="false"><span>促销经营</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-surroundings.svg" width="18" height="18" alt="" draggable="false"><span>周边态势</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-site.svg" width="18" height="18" alt="" draggable="false"><span>现场托管</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-equipment.svg" width="18" height="18" alt="" draggable="false"><span>设备健康</span></li>
+              <li class="nav-item nav-item--selected" aria-current="page"><img class="icon icon--18" src="./assets/nav-safety-selected.svg" width="18" height="18" alt="" draggable="false"><span>充电安全</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-customer-service.svg" width="18" height="18" alt="" draggable="false"><span>客服托管</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-public-opinion.svg" width="18" height="18" alt="" draggable="false"><span>舆情托管</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-value.svg" width="18" height="18" alt="" draggable="false"><span>价值评估</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-system.svg" width="18" height="18" alt="" draggable="false"><span>系统托管</span></li>
+            </ul>
+          </nav>
+        </aside>
+
+        <main class="content" aria-label="充电安全">
+          <!-- 电站范围与时间筛选：本阶段仅展示默认状态。 -->
+          <section class="scope-bar" aria-label="分析范围">
+            <div class="station-scope">
+              <span class="station-scope__icon" aria-hidden="true">
+                <img src="./assets/station-scope.svg" width="16" height="16" alt="" draggable="false">
+              </span>
+              <h1>山东区域全部托管电站</h1>
+              <img class="scope-chevron" src="./assets/scope-chevron.svg" width="10" height="10" alt="" draggable="false">
+            </div>
+            <ul class="period-options" aria-label="时间范围">
+              <li class="period-option period-option--selected" aria-current="true">近7天</li>
+              <li class="period-option">近30天</li>
+              <li class="period-option">自定义</li>
+            </ul>
+          </section>
+
+          <nav class="module-tabs" aria-label="充电安全页面">
+            <ul class="module-tabs__list" role="tablist" aria-label="充电安全页签">
+              <li role="presentation"><button class="module-tab module-tab--selected" id="tab-safe" role="tab" type="button" data-tab="safe" aria-controls="safety-dashboard" aria-selected="true" tabindex="0"><span>安全看板</span></button></li>
+              <li role="presentation"><button class="module-tab" id="tab-vehicle" role="tab" type="button" data-tab="vehicle" aria-controls="vehicle-dashboard" aria-selected="false" tabindex="-1"><span>车辆防护</span></button></li>
+              <li role="presentation"><button class="module-tab" id="tab-evaluation" role="tab" type="button" data-tab="evaluation" aria-controls="evaluation-dashboard" aria-selected="false" tabindex="-1"><span>安全评估</span></button></li>
+              <li role="presentation"><button class="module-tab" id="tab-warn" role="tab" type="button" data-tab="warn" aria-controls="warning-dashboard" aria-selected="false" tabindex="-1"><span>防护预警</span></button></li>
+            </ul>
+          </nav>
+
+          <!-- 已完成的页签支持切换；其余页签保留基础结构。 -->
+          <section class="module-content" id="safety-dashboard" role="tabpanel" aria-labelledby="tab-safe" tabindex="0">
+  <div class="dashboard">
+    <section class="protection-system" aria-label="安全防护概览">
+      <div class="protection-grid"><article class="kpi-card kpi-card--effect" aria-labelledby="kpi-effect">
+  <header class="kpi-card__header"><div class="kpi-title"><span class="kpi-icon"><img src="./assets/safety-effect@3x.png" alt="" width="24" height="24" draggable="false"></span><h3 id="kpi-effect">安全防护成效</h3><img class="metric-info" src="./assets/metric-info.svg" alt="" width="12" height="12"></div></header>
+  <div class="kpi-primary"><p class="kpi-value"><span class="metric-number">75</span><span class="metric-unit">%</span></p><p class="kpi-caption">烧车风险有效降低</p></div>
+  <dl class="kpi-minis" style="--mini-columns:2"><div class="kpi-mini"><dt>每10万笔订单减少</dt><dd class=""><span class="metric-number">0.4</span><span class="metric-unit">起</span></dd></div><div class="kpi-mini"><dt>高危车辆数<span class="mini-link">查看评估</span></dt><dd class=""><span class="metric-number">20</span><span class="metric-unit">辆</span></dd></div></dl>
+</article><article class="kpi-card kpi-card--protect" aria-labelledby="kpi-protect">
+  <header class="kpi-card__header"><div class="kpi-title"><span class="kpi-icon"><img src="./assets/safety-protect@3x.png" alt="" width="24" height="24" draggable="false"></span><h3 id="kpi-protect">AI防护次数</h3><img class="metric-info" src="./assets/metric-info.svg" alt="" width="12" height="12"></div></header>
+  <div class="kpi-primary"><p class="kpi-value"><span class="metric-number">2,846</span><span class="metric-unit">次</span></p><p class="kpi-caption">环比 <span class="metric-change metric-change--down"><img src="./assets/change-down.svg" width="8" height="8" alt="下降">2.36%</span></p></div>
+  <dl class="kpi-minis" style="--mini-columns:2"><div class="kpi-mini"><dt>防护车辆数</dt><dd class=""><span class="metric-number">480</span><span class="metric-unit">辆</span></dd></div><div class="kpi-mini"><dt>防护车型</dt><dd class=""><span class="metric-number">36</span><span class="metric-unit">个</span></dd></div></dl>
+</article><article class="kpi-card kpi-card--warning" aria-labelledby="kpi-warning">
+  <header class="kpi-card__header"><div class="kpi-title"><span class="kpi-icon"><img src="./assets/safety-warning@3x.png" alt="" width="24" height="24" draggable="false"></span><h3 id="kpi-warning">AI预警次数</h3><img class="metric-info" src="./assets/metric-info.svg" alt="" width="12" height="12"></div><span class="outline-action">查看全部</span></header>
+  <div class="kpi-primary"><p class="kpi-value"><span class="metric-number">236</span><span class="metric-unit">次</span></p><p class="kpi-caption">环比 <span class="metric-change metric-change--up"><img src="./assets/change-up.svg" width="8" height="8" alt="上升">7.83%</span></p></div>
+  <dl class="kpi-minis" style="--mini-columns:3"><div class="kpi-mini"><dt>高危预警</dt><dd class="danger"><span class="metric-number">82</span><span class="metric-unit">次</span></dd></div><div class="kpi-mini"><dt>严重预警</dt><dd class="warning"><span class="metric-number">100</span><span class="metric-unit">次</span></dd></div><div class="kpi-mini"><dt>一般预警</dt><dd class="notice"><span class="metric-number">54</span><span class="metric-unit">次</span></dd></div></dl>
+</article><article class="kpi-card kpi-card--block" aria-labelledby="kpi-block">
+  <header class="kpi-card__header"><div class="kpi-title"><span class="kpi-icon"><img src="./assets/safety-block@3x.png" alt="" width="24" height="24" draggable="false"></span><h3 id="kpi-block">AI阻断次数</h3><img class="metric-info" src="./assets/metric-info.svg" alt="" width="12" height="12"></div><span class="outline-action">查看全部</span></header>
+  <div class="kpi-primary"><p class="kpi-value"><span class="metric-number">68</span><span class="metric-unit">次</span></p><p class="kpi-caption">环比 <span class="metric-change metric-change--up"><img src="./assets/change-up.svg" width="8" height="8" alt="上升">4.03%</span></p></div>
+  <dl class="kpi-minis" style="--mini-columns:2"><div class="kpi-mini"><dt>阻断车辆数</dt><dd class=""><span class="metric-number">36</span><span class="metric-unit">辆</span></dd></div><div class="kpi-mini"><dt>阻断车型数</dt><dd class=""><span class="metric-number">12</span><span class="metric-unit">个</span></dd></div></dl>
+</article></div>
+    </section>
+    <div class="dashboard-middle">
+      <section class="dashboard-card trend-card" aria-labelledby="trend-heading">
+        <header class="dashboard-card__header"><h2 id="trend-heading">AI防护趋势图</h2><span class="chart-period">08-08 至 08-14</span></header>
+        <div class="trend-layout">
+          <div class="trend-visual"><div class="trend-chart" id="protection-chart"><svg class="trend-svg" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="08月08日至08月14日AI防护、预警与阻断趋势"></svg><div class="chart-tooltip" role="status" hidden></div></div><ul class="chart-legend" aria-label="图表图例"><li><span class="legend-bar"></span>AI防护次数</li><li><span class="legend-line legend-line--warning"></span>AI预警次数</li><li><span class="legend-line legend-line--block"></span>AI阻断次数</li></ul></div>
+          <dl class="trend-stats"><div class="trend-stat"><dt>AI防护预警占比</dt><dd><span class="metric-number">8.29</span><span class="metric-unit">%</span></dd><p>环比 <span class="metric-change metric-change--up"><img src="./assets/change-up.svg" width="8" height="8" alt="上升">0.05%</span></p></div><div class="trend-stat"><dt>AI防护阻断率</dt><dd><span class="metric-number">2.39</span><span class="metric-unit">%</span></dd><p>环比 <span class="metric-change metric-change--up"><img src="./assets/change-up.svg" width="8" height="8" alt="上升">0.02%</span></p></div><div class="trend-stat"><dt>高危预警数</dt><dd><span class="metric-number">82</span><span class="metric-unit">次</span></dd><p>环比 <span class="metric-change metric-change--up"><img src="./assets/change-up.svg" width="8" height="8" alt="上升">6</span></p></div></dl>
+        </div>
+        <div class="ai-diagnosis"><strong>AI诊断</strong><p>近7天预警主要集中在温升异常与热失控风险，建议优先复核高危车辆及重复触发预警的终端。</p></div>
+      </section>
+      <section class="dashboard-card realtime-card" aria-labelledby="realtime-heading"><header class="dashboard-card__header"><h2 id="realtime-heading">实时防护明细</h2><span class="text-action">查看全部 <span aria-hidden="true">›</span></span></header><ol class="protection-list"><li class="protection-item"><div class="protection-item__heading"><h3>电池温升异常，触发主动防护</h3><time>18:27:30</time></div><div class="protection-item__status"><span class="state-tag state-tag--danger">高危预警</span><span class="state-tag state-tag--blocked">已阻断</span><span class="vehicle-model">特斯拉 Model Y</span></div><div class="protection-item__meta"><span>示例充电站 A · 025号终端</span><span class="order-id">订单 DEMO-20260808-001</span></div></li><li class="protection-item"><div class="protection-item__heading"><h3>车辆电池组温度过高</h3><time>17:19:27</time></div><div class="protection-item__status"><span class="state-tag state-tag--warning">严重预警</span><span class="state-tag state-tag--blocked">已阻断</span><span class="vehicle-model">理想 L7</span></div><div class="protection-item__meta"><span>示例充电站 B · 003A号终端</span><span class="order-id">订单 DEMO-20260808-002</span></div></li><li class="protection-item"><div class="protection-item__heading"><h3>BMS通讯波动，需持续关注</h3><time>14:16:29</time></div><div class="protection-item__status"><span class="state-tag state-tag--normal">一般预警</span><span class="vehicle-model">AITO 问界M5</span></div><div class="protection-item__meta"><span>示例充电站 C · 001A号终端</span><span class="order-id">订单 DEMO-20260808-003</span></div></li></ol></section>
+    </div>
+    <div class="dashboard-rankings"><section class="dashboard-card rank-card rank-card--warning" aria-labelledby="warning-ranking"><header class="dashboard-card__header"><div class="rank-heading"><h2 id="warning-ranking">预警类型排名</h2><p class="section-description">按预警触发类型统计，展示次数及占比 Top5</p></div><p class="rank-total">总预警 <strong class="metric-number">236</strong><span>次</span></p></header><ol class="ranking-list"><li class="rank-item"><span class="rank-index">01</span><div class="rank-label"><span class="rank-name">大数据温升异常</span><span class="state-tag state-tag--danger">高危预警</span></div><div class="rank-track" aria-hidden="true"><span style="width:34.746%"></span></div><div class="rank-count"><span class="metric-number">82</span><span>次</span></div><span class="rank-percent">34.7%</span></li><li class="rank-item"><span class="rank-index">02</span><div class="rank-label"><span class="rank-name">热失控风险预警</span><span class="state-tag state-tag--warning">严重预警</span></div><div class="rank-track" aria-hidden="true"><span style="width:24.576%"></span></div><div class="rank-count"><span class="metric-number">58</span><span>次</span></div><span class="rank-percent">24.6%</span></li><li class="rank-item"><span class="rank-index">03</span><div class="rank-label"><span class="rank-name">车辆连接异常</span><span class="state-tag state-tag--warning">严重预警</span></div><div class="rank-track" aria-hidden="true"><span style="width:17.797%"></span></div><div class="rank-count"><span class="metric-number">42</span><span>次</span></div><span class="rank-percent">17.8%</span></li><li class="rank-item"><span class="rank-index">04</span><div class="rank-label"><span class="rank-name">电芯压差异常</span><span class="state-tag state-tag--normal">一般预警</span></div><div class="rank-track" aria-hidden="true"><span style="width:13.559%"></span></div><div class="rank-count"><span class="metric-number">32</span><span>次</span></div><span class="rank-percent">13.6%</span></li><li class="rank-item"><span class="rank-index">05</span><div class="rank-label"><span class="rank-name">SOC变化异常</span><span class="state-tag state-tag--normal">一般预警</span></div><div class="rank-track" aria-hidden="true"><span style="width:9.322%"></span></div><div class="rank-count"><span class="metric-number">22</span><span>次</span></div><span class="rank-percent">9.3%</span></li></ol></section><section class="dashboard-card rank-card rank-card--block" aria-labelledby="block-ranking"><header class="dashboard-card__header"><div class="rank-heading"><h2 id="block-ranking">阻断类型排名</h2><p class="section-description">按主动阻断原因统计，展示次数及占比 Top5</p></div><p class="rank-total">总阻断 <strong class="metric-number">68</strong><span>次</span></p></header><ol class="ranking-list"><li class="rank-item"><span class="rank-index">01</span><div class="rank-label"><span class="rank-name">MS2SOC数据异常保护终止</span><span class="state-tag state-tag--danger">高危预警</span></div><div class="rank-track" aria-hidden="true"><span style="width:41.176%"></span></div><div class="rank-count"><span class="metric-number">28</span><span>次</span></div><span class="rank-percent">41.2%</span></li><li class="rank-item"><span class="rank-index">02</span><div class="rank-label"><span class="rank-name">大数据单体过压防护</span><span class="state-tag state-tag--warning">严重预警</span></div><div class="rank-track" aria-hidden="true"><span style="width:29.412%"></span></div><div class="rank-count"><span class="metric-number">20</span><span>次</span></div><span class="rank-percent">29.4%</span></li><li class="rank-item"><span class="rank-index">03</span><div class="rank-label"><span class="rank-name">主动防护过温保护</span><span class="state-tag state-tag--warning">严重预警</span></div><div class="rank-track" aria-hidden="true"><span style="width:14.706%"></span></div><div class="rank-count"><span class="metric-number">10</span><span>次</span></div><span class="rank-percent">14.7%</span></li><li class="rank-item"><span class="rank-index">04</span><div class="rank-label"><span class="rank-name">主动防护过流保护</span><span class="state-tag state-tag--normal">一般预警</span></div><div class="rank-track" aria-hidden="true"><span style="width:8.824%"></span></div><div class="rank-count"><span class="metric-number">6</span><span>次</span></div><span class="rank-percent">8.8%</span></li><li class="rank-item"><span class="rank-index">05</span><div class="rank-label"><span class="rank-name">充电机电流不匹配终止</span><span class="state-tag state-tag--normal">一般预警</span></div><div class="rank-track" aria-hidden="true"><span style="width:5.882%"></span></div><div class="rank-count"><span class="metric-number">4</span><span>次</span></div><span class="rank-percent">5.9%</span></li></ol></section></div>
+  </div>
+</section>
+
+          <section class="module-content" id="vehicle-dashboard" role="tabpanel" aria-labelledby="tab-vehicle" tabindex="0" hidden>
+            <div class="dashboard vehicle-dashboard">
+              <section class="vehicle-type-grid" aria-label="车辆类型分布">
+<article class="vehicle-type-card">
+  <img class="vehicle-type-image" src="./assets/vehicle-total@3x.png" width="68" height="68" alt="" draggable="false">
+  <div class="vehicle-type-info"><h3>总车辆数</h3><div class="vehicle-type-bottom"><p class="vehicle-type-value"><span class="metric-number">480</span><span class="metric-unit">辆</span></p><p class="vehicle-type-meta">车型数 <strong>36</strong></p></div></div>
+</article>
+<article class="vehicle-type-card">
+  <img class="vehicle-type-image" src="./assets/vehicle-passenger@3x.png" width="68" height="68" alt="" draggable="false">
+  <div class="vehicle-type-info"><h3>乘用车</h3><div class="vehicle-type-bottom"><p class="vehicle-type-value"><span class="metric-number">408</span><span class="metric-unit">辆</span></p><p class="vehicle-type-meta">占比 <strong>85.00%</strong></p></div></div>
+</article>
+<article class="vehicle-type-card">
+  <img class="vehicle-type-image" src="./assets/vehicle-cargo@3x.png" width="68" height="68" alt="" draggable="false">
+  <div class="vehicle-type-info"><h3>商用货车</h3><div class="vehicle-type-bottom"><p class="vehicle-type-value"><span class="metric-number">60</span><span class="metric-unit">辆</span></p><p class="vehicle-type-meta">占比 <strong>12.50%</strong></p></div></div>
+</article>
+<article class="vehicle-type-card">
+  <img class="vehicle-type-image" src="./assets/vehicle-bus@3x.png" width="68" height="68" alt="" draggable="false">
+  <div class="vehicle-type-info"><h3>商用客车</h3><div class="vehicle-type-bottom"><p class="vehicle-type-value"><span class="metric-number">12</span><span class="metric-unit">辆</span></p><p class="vehicle-type-meta">占比 <strong>2.50%</strong></p></div></div>
+</article>
+              </section>
+              <section class="dashboard-card vehicle-health" aria-labelledby="vehicle-health-heading">
+                <header class="dashboard-card__header"><h2 id="vehicle-health-heading">车辆健康分布</h2></header>
+                <div class="vehicle-health-grid">
+                  <section class="vehicle-health-panel health-overview" aria-labelledby="health-status-heading">
+                    <header class="vehicle-subheading"><h3 id="health-status-heading">车辆健康状态</h3></header>
+                    <div class="health-stack" role="img" aria-label="健康90.00%，亚健康5.83%，高危4.17%"><span class="health-stack--healthy" style="width:90.00%"></span><span class="health-stack--subhealthy" style="width:5.83%"></span><span class="health-stack--risk" style="width:4.17%"></span></div>
+                    <dl class="health-summary-grid"><div class="health-summary health-summary--healthy"><dt><span class="health-dot" aria-hidden="true"></span>健康</dt><dd><span class="metric-number">432</span><span class="metric-unit">辆</span></dd><p>90.00%</p></div>
+<div class="health-summary health-summary--subhealthy"><dt><span class="health-dot" aria-hidden="true"></span>亚健康</dt><dd><span class="metric-number">28</span><span class="metric-unit">辆</span></dd><p>5.83%</p></div>
+<div class="health-summary health-summary--risk"><dt><span class="health-dot" aria-hidden="true"></span>高危</dt><dd><span class="metric-number">20</span><span class="metric-unit">辆</span></dd><p>4.17%</p></div></dl>
+                    <div class="health-access"><p>未购买 AI 管家，购买后可查看高危车辆明细</p><span class="health-detail" aria-disabled="true">查看明细</span></div>
+                  </section>
+                  <section class="vehicle-health-panel health-models" aria-labelledby="health-models-heading">
+                    <header class="vehicle-subheading"><h3 id="health-models-heading">高危车辆车型分布</h3><span class="vehicle-top-label">Top5</span></header>
+                    <ol class="ranking-list health-model-list"><li class="rank-item health-model-row"><span class="rank-index">01</span><span class="rank-name">08 EM-P 120km</span><div class="rank-track" aria-hidden="true"><span style="width:100.000%"></span></div><div class="rank-count"><span class="metric-number">5</span><span>辆</span></div></li>
+<li class="rank-item health-model-row"><span class="rank-index">02</span><span class="rank-name">秦 450km</span><div class="rank-track" aria-hidden="true"><span style="width:80.000%"></span></div><div class="rank-count"><span class="metric-number">4</span><span>辆</span></div></li>
+<li class="rank-item health-model-row"><span class="rank-index">03</span><span class="rank-name">B30EV 406km</span><div class="rank-track" aria-hidden="true"><span style="width:60.000%"></span></div><div class="rank-count"><span class="metric-number">3</span><span>辆</span></div></li>
+<li class="rank-item health-model-row"><span class="rank-index">04</span><span class="rank-name">微蓝6 410km</span><div class="rank-track" aria-hidden="true"><span style="width:40.000%"></span></div><div class="rank-count"><span class="metric-number">2</span><span>辆</span></div></li>
+<li class="rank-item health-model-row"><span class="rank-index">05</span><span class="rank-name">畅巡 410km</span><div class="rank-track" aria-hidden="true"><span style="width:20.000%"></span></div><div class="rank-count"><span class="metric-number">1</span><span>辆</span></div></li></ol>
+                  </section>
+                  <section class="vehicle-health-panel health-categories" aria-labelledby="health-categories-heading">
+                    <header class="vehicle-subheading"><h3 id="health-categories-heading">高危车辆大类分布</h3></header>
+                    <div class="vehicle-category-layout">
+                      <div class="vehicle-category-donut" style="--passenger-share:80%;--cargo-end:95%" role="img" aria-label="高危车辆共20辆：乘用车16辆，占80.0%；商用货车3辆，占15.0%；商用客车1辆，占5.0%"><div class="vehicle-donut-center"><strong class="metric-number">20</strong><span>高危车辆</span></div></div>
+                      <ul class="vehicle-category-legend"><li><span class="vehicle-category-dot vehicle-category-dot--passenger" aria-hidden="true"></span><span>乘用车</span><strong><span class="metric-number">16</span><span class="metric-unit">辆</span></strong><span class="vehicle-category-percent">80.0%</span></li>
+<li><span class="vehicle-category-dot vehicle-category-dot--cargo" aria-hidden="true"></span><span>商用货车</span><strong><span class="metric-number">3</span><span class="metric-unit">辆</span></strong><span class="vehicle-category-percent">15.0%</span></li>
+<li><span class="vehicle-category-dot vehicle-category-dot--bus" aria-hidden="true"></span><span>商用客车</span><strong><span class="metric-number">1</span><span class="metric-unit">辆</span></strong><span class="vehicle-category-percent">5.0%</span></li></ul>
+                    </div>
+                  </section>
+                </div>
+              </section>
+              <div class="dashboard-rankings vehicle-model-rankings">
+                <section class="dashboard-card rank-card rank-card--warning" aria-labelledby="vehicle-warning-heading">
+                  <header class="dashboard-card__header"><div class="rank-heading"><h2 id="vehicle-warning-heading">预警车型排名</h2><p class="section-description">按车型统计预警次数及占比 Top5</p></div><p class="rank-total">总预警 <strong class="metric-number">236</strong><span>次</span></p></header>
+                  <ol class="ranking-list"><li class="rank-item vehicle-model-row"><span class="rank-index">01</span><span class="rank-name">比亚迪秦 400km</span><div class="rank-track" aria-hidden="true"><span style="width:100.000%"></span></div><div class="rank-count"><span class="metric-number">42</span><span>次</span></div><span class="rank-percent">17.8%</span></li>
+<li class="rank-item vehicle-model-row"><span class="rank-index">02</span><span class="rank-name">奇瑞eQ1 301km</span><div class="rank-track" aria-hidden="true"><span style="width:80.952%"></span></div><div class="rank-count"><span class="metric-number">34</span><span>次</span></div><span class="rank-percent">14.4%</span></li>
+<li class="rank-item vehicle-model-row"><span class="rank-index">03</span><span class="rank-name">长安新能源逸动EV460</span><div class="rank-track" aria-hidden="true"><span style="width:66.667%"></span></div><div class="rank-count"><span class="metric-number">28</span><span>次</span></div><span class="rank-percent">11.9%</span></li>
+<li class="rank-item vehicle-model-row"><span class="rank-index">04</span><span class="rank-name">奔腾E05 401km</span><div class="rank-track" aria-hidden="true"><span style="width:54.762%"></span></div><div class="rank-count"><span class="metric-number">23</span><span>次</span></div><span class="rank-percent">9.7%</span></li>
+<li class="rank-item vehicle-model-row"><span class="rank-index">05</span><span class="rank-name">特斯拉Model Y 594km</span><div class="rank-track" aria-hidden="true"><span style="width:45.238%"></span></div><div class="rank-count"><span class="metric-number">19</span><span>次</span></div><span class="rank-percent">8.1%</span></li></ol>
+                </section>
+                <section class="dashboard-card rank-card rank-card--block" aria-labelledby="vehicle-block-heading">
+                  <header class="dashboard-card__header"><div class="rank-heading"><h2 id="vehicle-block-heading">阻断车型排名</h2><p class="section-description">按车型统计阻断次数及占比 Top5</p></div><p class="rank-total">总阻断 <strong class="metric-number">68</strong><span>次</span></p></header>
+                  <ol class="ranking-list"><li class="rank-item vehicle-model-row"><span class="rank-index">01</span><span class="rank-name">中通LCK6809EVGK</span><div class="rank-track" aria-hidden="true"><span style="width:100.000%"></span></div><div class="rank-count"><span class="metric-number">16</span><span>次</span></div><span class="rank-percent">23.5%</span></li>
+<li class="rank-item vehicle-model-row"><span class="rank-index">02</span><span class="rank-name">重汽豪沃JK6126GPHE</span><div class="rank-track" aria-hidden="true"><span style="width:81.250%"></span></div><div class="rank-count"><span class="metric-number">13</span><span>次</span></div><span class="rank-percent">19.1%</span></li>
+<li class="rank-item vehicle-model-row"><span class="rank-index">03</span><span class="rank-name">奔腾B30EV 406km</span><div class="rank-track" aria-hidden="true"><span style="width:62.500%"></span></div><div class="rank-count"><span class="metric-number">10</span><span>次</span></div><span class="rank-percent">14.7%</span></li>
+<li class="rank-item vehicle-model-row"><span class="rank-index">04</span><span class="rank-name">宝马 iX1</span><div class="rank-track" aria-hidden="true"><span style="width:50.000%"></span></div><div class="rank-count"><span class="metric-number">8</span><span>次</span></div><span class="rank-percent">11.8%</span></li>
+<li class="rank-item vehicle-model-row"><span class="rank-index">05</span><span class="rank-name">别克微蓝6 410km</span><div class="rank-track" aria-hidden="true"><span style="width:37.500%"></span></div><div class="rank-count"><span class="metric-number">6</span><span>次</span></div><span class="rank-percent">8.8%</span></li></ol>
+                </section>
+              </div>
+            </div>
+          </section>
+          <section class="module-content" id="evaluation-dashboard" role="tabpanel" aria-labelledby="tab-evaluation" tabindex="0" hidden>
+            <div class="dashboard evaluation-dashboard">
+              <section class="dashboard-card evaluation-card" aria-label="安全评估列表">
+                <form class="evaluation-filters" id="evaluation-form" aria-label="安全评估筛选">
+                  <div class="evaluation-field"><label for="evaluation-date"><span class="field-required" aria-hidden="true">*</span>评估日期</label><input id="evaluation-date" name="date" type="date" value="2026-08-17" required></div>
+                  <div class="evaluation-field"><label for="evaluation-vin">车架号</label><input id="evaluation-vin" name="vin" type="text" placeholder="请输入车架号" autocomplete="off" maxlength="40"></div>
+                  <div class="evaluation-field"><label for="evaluation-score">总分</label><input id="evaluation-score" name="score" type="number" min="0" max="100" step="0.1" placeholder="请输入总分"></div>
+                  <div class="evaluation-field"><label for="evaluation-health">健康状态</label><select id="evaluation-health" name="health"><option value="高危" selected>高危</option><option value="全部">全部</option><option value="亚健康">亚健康</option><option value="健康">健康</option></select></div>
+                  <div class="evaluation-field"><label for="evaluation-category">车辆大类</label><select id="evaluation-category" name="category"><option value="">全部大类</option><option>乘用车</option><option>商用货车</option><option>商用客车</option></select></div>
+                  <div class="evaluation-field"><label for="evaluation-brand">判定品牌</label><select id="evaluation-brand" name="brand"><option value="">全部品牌</option></select></div>
+                  <div class="evaluation-field"><label for="evaluation-model">车系通用名称</label><select id="evaluation-model" name="model"><option value="">全部车系</option></select></div>
+                  <div class="evaluation-filter-actions"><button class="evaluation-button evaluation-button--primary" type="submit">查询</button><button class="evaluation-button" type="reset">重置</button></div>
+                </form>
+                <div class="evaluation-table-scroll" id="evaluation-table-scroll" tabindex="0" role="region" aria-label="安全评估数据表，可横向滚动">
+                  <table class="evaluation-table">
+                    <colgroup><col style="width:112px"><col style="width:168px"><col style="width:88px"><col style="width:80px"><col style="width:96px"><col style="width:92px"><col style="width:100px"><col style="width:110px"><col style="width:164px"><col style="width:204px"><col style="width:124px"><col style="width:112px"></colgroup>
+                    <thead><tr><th scope="col">评估日期</th><th scope="col">车架号</th><th scope="col">统计类型</th><th scope="col">总分</th><th scope="col">健康状态</th><th scope="col">城市名称</th><th scope="col">车辆大类</th><th scope="col">车辆品牌</th><th scope="col">车型名称</th><th scope="col">判定危险项</th><th scope="col">电池健康评分</th><th scope="col" class="evaluation-operation">操作</th></tr></thead>
+                    <tbody id="evaluation-table-body"></tbody>
+                  </table>
+                  <div class="evaluation-empty" id="evaluation-empty" hidden><strong>暂无匹配的评估记录</strong><p>试试调整筛选条件后重新查询</p></div>
+                </div>
+                <footer class="evaluation-footer"><p id="evaluation-summary" aria-live="polite"></p><nav class="evaluation-pagination" id="evaluation-pagination" aria-label="评估列表分页"></nav></footer>
+              </section>
+            </div>
+          </section>
+          <section class="module-content" id="warning-dashboard" role="tabpanel" aria-labelledby="tab-warn" tabindex="0" hidden>
+            <div class="dashboard warning-dashboard">
+              <div class="warning-overview" role="group" aria-label="预警概览与快捷筛选">
+                <button class="warning-kpi warning-kpi--danger" type="button" data-warning-filter="高危预警" aria-pressed="false" aria-controls="warning-table-body"><img class="warning-kpi-image" src="./assets/warning-high@3x.png" width="68" height="68" alt="" draggable="false"><span class="warning-kpi-info"><span class="warning-kpi-title">高危预警</span><span class="warning-kpi-value"><strong class="metric-number" data-warning-count="高危预警">82</strong><span class="metric-unit">次</span></span></span></button>
+                <button class="warning-kpi warning-kpi--severe" type="button" data-warning-filter="严重预警" aria-pressed="false" aria-controls="warning-table-body"><img class="warning-kpi-image" src="./assets/warning-severe@3x.png" width="68" height="68" alt="" draggable="false"><span class="warning-kpi-info"><span class="warning-kpi-title">严重预警</span><span class="warning-kpi-value"><strong class="metric-number" data-warning-count="严重预警">100</strong><span class="metric-unit">次</span></span></span></button>
+                <button class="warning-kpi warning-kpi--normal" type="button" data-warning-filter="一般预警" aria-pressed="false" aria-controls="warning-table-body"><img class="warning-kpi-image" src="./assets/warning-normal@3x.png" width="68" height="68" alt="" draggable="false"><span class="warning-kpi-info"><span class="warning-kpi-title">一般预警</span><span class="warning-kpi-value"><strong class="metric-number" data-warning-count="一般预警">54</strong><span class="metric-unit">次</span></span></span></button>
+                <button class="warning-kpi warning-kpi--blocked" type="button" data-warning-filter="blocked" aria-pressed="false" aria-controls="warning-table-body"><img class="warning-kpi-image" src="./assets/warning-block@3x.png" width="68" height="68" alt="" draggable="false"><span class="warning-kpi-info"><span class="warning-kpi-title">阻断次数</span><span class="warning-kpi-value"><strong class="metric-number" data-warning-count="blocked">68</strong><span class="metric-unit">次</span></span></span></button>
+              </div>
+              <section class="dashboard-card evaluation-card warning-card" aria-label="防护预警列表">
+                <form class="warning-filters" id="warning-form" aria-label="防护预警筛选">
+                  <div class="evaluation-field warning-time-field"><span class="warning-field-label" id="warning-time-label">预警时间</span><div class="warning-date-range" role="group" aria-labelledby="warning-time-label"><input id="warning-start" name="start" type="date" aria-label="预警开始日期" value="2026-08-08" required><span>至</span><input id="warning-end" name="end" type="date" aria-label="预警结束日期" value="2026-08-14" required></div></div>
+                  <div class="evaluation-field"><label for="warning-order">订单编号</label><input id="warning-order" name="order" type="text" placeholder="请输入订单编号" autocomplete="off" maxlength="40"></div>
+                  <div class="evaluation-field"><label for="warning-level">预警级别</label><select id="warning-level" name="level"><option value="">全部级别</option><option>高危预警</option><option>严重预警</option><option>一般预警</option></select></div>
+                  <div class="evaluation-filter-actions"><button class="evaluation-button evaluation-button--primary" type="submit">查询</button><button class="evaluation-button" type="reset">重置</button></div>
+                </form>
+                <div class="evaluation-table-scroll" id="warning-table-scroll" tabindex="0" role="region" aria-label="防护预警数据表，可横向滚动">
+                  <table class="evaluation-table warning-table">
+                    <colgroup><col style="width:164px"><col style="width:188px"><col style="width:146px"><col style="width:162px"><col style="width:168px"><col style="width:112px"><col style="width:182px"><col style="width:116px"><col style="width:100px"></colgroup>
+                    <thead><tr><th scope="col">发生时间</th><th scope="col">订单编号</th><th scope="col">结束原因</th><th scope="col">车型</th><th scope="col">电站名称</th><th scope="col">终端名称</th><th scope="col">预警类型</th><th scope="col">预警级别</th><th scope="col">是否阻断</th></tr></thead>
+                    <tbody id="warning-table-body"></tbody>
+                  </table>
+                  <div class="evaluation-empty" id="warning-empty" hidden><strong>暂无匹配的预警记录</strong><p>试试调整筛选条件后重新查询</p></div>
+                </div>
+                <footer class="evaluation-footer"><p id="warning-summary" aria-live="polite"></p><nav class="evaluation-pagination" id="warning-pagination" aria-label="预警列表分页"></nav></footer>
+              </section>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+    <dialog class="evaluation-dialog" id="evaluation-dialog" aria-labelledby="evaluation-detail-title">
+      <header class="evaluation-dialog-header"><div><h2 id="evaluation-detail-title">评估详情</h2><p id="evaluation-detail-vehicle"></p></div><button class="evaluation-button" id="evaluation-detail-close" type="button" autofocus>关闭</button></header>
+      <div class="evaluation-detail-body">
+        <dl class="evaluation-detail-summary" id="evaluation-detail-summary"></dl>
+        <section class="evaluation-detail-section"><h3>指标得分</h3><div class="evaluation-metrics" id="evaluation-detail-metrics"></div></section>
+        <section class="evaluation-detail-conclusion"><h3>评估结论</h3><div id="evaluation-detail-danger"></div><p id="evaluation-detail-note"></p></section>
+      </div>
+    </dialog>
+    <script type="application/json" id="safety-trend-data">{"dates": ["08/08", "08/09", "08/10", "08/11", "08/12", "08/13", "08/14"], "protect": [392, 416, 405, 438, 397, 402, 396], "warning": [29, 34, 31, 39, 32, 36, 35], "block": [8, 10, 9, 12, 9, 10, 10]}</script>
+  </body>
+</html>
