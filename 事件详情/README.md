@@ -1,5 +1,7 @@
 # AI 管家 · 事件详情
 
+包含调价策略、促销策略、经营机会、社会事件与通知决策五类高保真 Demo，按场景独立维护。
+
 [全部 Demo 在线入口](https://wangyekai918-star.github.io/ai-butler/) · [仓库说明](../README.md)
 
 | Demo | 场景 | 在线演示 | 源码 |
