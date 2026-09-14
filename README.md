@@ -20,7 +20,8 @@ AI 管家各模块的高保真 UI Demo，供设计评审与开发参考。页面
 AI 管家/
 ├── index.html                 # 全部 Demo 的在线入口
 ├── style.css                  # 入口页样式
-├── README.md
+├── README.md                  # 项目说明与各 Demo 在线链接
+├── AGENTS.md                  # AI 协作与项目开发约定
 ├── AI管家UI风格规范.md
 ├── design-reference/          # 公共风格依据与参数
 └── 事件详情/                  # 按业务模块归档
