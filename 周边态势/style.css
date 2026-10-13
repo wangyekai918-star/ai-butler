@@ -1,0 +1,469 @@
+/* AI 管家 · 周边态势
+ * 顶部导航与侧栏复用现有 AI 管家外壳；所有资源在当前模块本地引用。
+ */
+
+/* ==================== 01 基础变量与页面外壳 ==================== */
+@font-face {
+  font-family: "Oswald";
+  src: url("./assets/fonts/Oswald-SemiBold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+  --page-background: #f0f2f5;
+  --surface: #ffffff;
+  --primary: #315eef;
+  --primary-light: #eef4ff;
+  --text-primary: #111827;
+  --text-secondary: #344054;
+  --text-muted: #667085;
+  --text-annotation: #93a1bf;
+  --border: #e6ebf2;
+  --topbar-height: 60px;
+  --sidebar-width: 218px;
+  --page-padding: 12px;
+  --layout-gap: 14px;
+  --inner-module-gap: 8px;
+  --font-number: "Oswald", sans-serif;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--page-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-width: 1024px; }
+body { cursor: default; }
+img { display: block; }
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex: 0 0 var(--topbar-height);
+  height: var(--topbar-height);
+  padding: 12px 16px;
+  background: var(--surface);
+  box-shadow: 0 6px 16px rgb(15 23 42 / 4%);
+}
+
+.topbar__left, .topbar__right {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.topbar__left { gap: var(--layout-gap); }
+.topbar__right { gap: 8px; }
+.brand { width: var(--sidebar-width); flex-shrink: 0; }
+.brand__logo { width: 133px; height: 36px; }
+
+.organization {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 11px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #1f2937;
+  white-space: nowrap;
+}
+
+.icon { flex-shrink: 0; object-fit: contain; }
+.icon--16 { width: 16px; height: 16px; }
+.icon--18 { width: 18px; height: 18px; }
+.icon--22 { width: 22px; height: 22px; }
+
+.notification, .feedback, .user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 43px;
+  line-height: 18px;
+  white-space: nowrap;
+}
+.notification { position: relative; width: 34px; }
+.notification__badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border: 0.917px solid #ffffff;
+  border-radius: 7.333px;
+  background: #ff4d4f;
+  color: #ffffff;
+  font-size: 9.167px;
+  line-height: 9.167px;
+}
+.feedback { padding: 0 12px; }
+.user { gap: 4px; padding: 0 12px 0 6px; border-radius: 72px; }
+.user__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #2f6bff;
+  color: #ffffff;
+  font-size: 11px;
+  line-height: 11px;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+  align-items: stretch;
+  min-height: 0;
+  gap: var(--layout-gap);
+  flex: 1;
+  padding: var(--page-padding);
+}
+.sidebar {
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #d8dfe8 transparent;
+  padding: 10px;
+  border-radius: 16px;
+  background: var(--surface);
+}
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 10px;
+  border-radius: 8px;
+  line-height: 18px;
+  white-space: nowrap;
+}
+.nav-item--selected {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+/* ==================== 02 主内容布局与静态范围入口 ==================== */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--layout-gap);
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #d8dfe8 transparent;
+  font-weight: 400;
+}
+
+.scope-bar {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 20px;
+  min-height: 52px;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--surface);
+}
+.scope-control { display: flex; align-items: center; gap: 6px; }
+.scope-icon {
+  display: grid;
+  flex: 0 0 24px;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+  border-radius: 6px;
+}
+.scope-icon--station { background: linear-gradient(180deg, #8770ff, #504efa); }
+.scope-icon--distance { background: linear-gradient(180deg, #4ce683, #09c44c); }
+.scope-control__label {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+.scope-chevron { flex: 0 0 auto; }
+
+/* ==================== 03 竞争力分析与共用分段页签 ==================== */
+.competition-layout {
+  display: grid;
+  grid-template-columns: minmax(278px, 1fr) 480px;
+  align-items: start;
+  gap: 10px;
+}
+.analysis-card, .ranking-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--surface);
+}
+.analysis-card { gap: 8px; container: analysis / inline-size; }
+.analysis-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; }
+.analysis-header .card-title { flex-shrink: 0; }
+@container analysis (max-width: 320px) {
+  .analysis-tabs .segment { padding-inline: 12px; }
+}
+.card-title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 25px;
+}
+.segmented-control {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 3px;
+  border-radius: 10px;
+  background: var(--page-background);
+  list-style: none;
+}
+.segment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15px;
+  white-space: nowrap;
+}
+.segment--selected {
+  background: var(--surface);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 5%);
+  color: var(--primary);
+}
+.analysis-canvas { width: 100%; min-width: 0; margin-top: 4px; }
+.analysis-panel[hidden] { display: none; }
+.analysis-tabs button { border: 0; font-family: inherit; cursor: pointer; }
+.analysis-tabs button:not(.segment--selected) { background: transparent; }
+.analysis-tabs button:disabled { cursor: default; }
+
+/* ==================== 04 竞争力排行榜 ==================== */
+.ranking-card { gap: 12px; }
+.ranking-header { display: flex; align-items: center; gap: 4px; }
+.ranking-info { display: grid; place-items: center; width: 14px; height: 14px; }
+.ranking-tabs { align-self: stretch; }
+.ranking-tabs .segment { flex: 1 1 0; }
+.rank-list { align-self: stretch; margin: 0; padding: 0; list-style: none; }
+.rank-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0 0 14px;
+  padding: 0 0 14px;
+}
+.rank-item:last-child { margin-bottom: 0; }
+.rank-row { display: flex; align-items: center; gap: 12px; min-height: 20px; }
+.rank-medal, .rank-number {
+  position: relative;
+  display: grid;
+  flex: 0 0 20px;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  font-family: var(--font-number);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--text-annotation);
+}
+/* 保留 Figma SVG 的原始尺寸，在 20px 奖牌槽位中定位各层。 */
+.rank-medal__ribbon { position: absolute; top: 12px; left: 3.3333px; }
+.rank-medal__front { position: absolute; top: .6667px; left: 2px; }
+/* 数字对齐 16px 圆形奖牌，不包含下方绶带的高度。 */
+.rank-medal > span { position: absolute; top: .6667px; left: 2px; display: grid; place-items: center; width: 16px; height: 16px; color: #fff; font-size: 10px; line-height: 1; }
+.rank-station {
+  flex: 0 0 170px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--text-primary);
+}
+.rank-rating { display: flex; flex: 1 1 0; align-items: center; gap: 4px; min-width: 0; }
+.rank-score { flex: 0 0 32px; color: var(--text-primary); font-size: 12px; font-weight: 600; line-height: 17px; white-space: nowrap; }
+.rating-stars { display: flex; flex: 0 0 auto; align-items: center; gap: 4px; }
+.rating-star { position: relative; display: block; width: 16px; height: 16px; overflow: hidden; }
+.rating-star img { position: absolute; top: calc(50% + .06px); left: 50%; transform: translate(-50%, -50%); }
+.rating-star--half img { top: calc(50% - .91px); left: calc(50% - .2px); }
+.rank-distance { flex: 0 0 auto; color: var(--text-annotation); font-size: 13px; font-weight: 400; line-height: 18px; text-align: right; white-space: nowrap; }
+.rank-item--current .rank-station, .rank-item--current .rank-distance { color: var(--primary); font-weight: 600; }
+.rank-highlights { display: flex; gap: 6px; padding: 0 32px; }
+.rank-highlight { flex: 0 0 auto; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: 400; line-height: 17px; white-space: nowrap; }
+.rank-highlight--advantage { background: rgb(5 179 127 / 10%); color: #05b37f; }
+.rank-highlight--improve { background: rgb(255 102 36 / 10%); color: #ff6624; }
+.rank-divider { position: absolute; bottom: 0; left: 0; }
+.ranking-footer {
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+/* ==================== 05 战略定位：气泡图、分析卡与 AI 总结 ==================== */
+.strategy-layout { display: grid; grid-template-columns: minmax(0, 1fr) 292px; gap: 12px; align-items: stretch; }
+.strategy-figure { min-width: 0; margin: 0; }
+.strategy-chart { width: 100%; height: 348px; }
+.strategy-legend { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 16px; padding: 4px 4px 0; color: var(--text-muted); font-size: 12px; line-height: 20px; }
+.strategy-legend__items { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 0; padding: 0; list-style: none; }
+.strategy-legend__items li { display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+.legend-dot { display: block; width: 9px; height: 9px; flex: 0 0 9px; border-radius: 50%; }
+.legend-dot--self { background: #315eef; }
+.legend-dot--decrease { background: #05b37f; }
+.legend-dot--increase { background: #e34c4c; }
+.legend-dot--new-station { background: #9852ef; }
+.legend-dot--normal { background: #98a2b3; }
+.bubble-size-key { display: flex; align-items: center; gap: 2px; white-space: nowrap; }
+.bubble-help { position: relative; display: inline-flex; }
+.bubble-help__trigger { display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border: 0; background: transparent; cursor: help; }
+.bubble-help__text { position: absolute; z-index: 12; right: 0; bottom: 30px; width: 224px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; background: #fff; box-shadow: 0 4px 16px rgb(17 24 39 / 8%); color: var(--text-secondary); font-size: 12px; line-height: 20px; white-space: normal; visibility: hidden; opacity: 0; transition: opacity .15s ease; pointer-events: none; }
+.bubble-help:hover .bubble-help__text, .bubble-help:focus-within .bubble-help__text { visibility: visible; opacity: 1; }
+.strategy-insights { display: grid; grid-template-rows: repeat(3, 1fr); gap: 8px; }
+.strategy-insight { min-width: 0; padding: 12px; border: 0; border-radius: 12px; background: var(--insight-background); }
+.strategy-insight--landscape { --insight-color: #315eef; --insight-background: #f5f8ff; --insight-icon: url("./assets/strategy-landscape.svg"); }
+.strategy-insight--pressure { --insight-color: #e24a45; --insight-background: #fff7f6; --insight-icon: url("./assets/strategy-pressure.svg"); }
+.strategy-insight--focus { --insight-color: #05a777; --insight-background: #f2fbf7; --insight-icon: url("./assets/strategy-focus.svg"); }
+.strategy-insight h2 { margin: 0 0 8px; }
+.strategy-insight__heading { display: flex; align-items: center; gap: 6px; width: 100%; padding: 0; border: 0; background: transparent; color: var(--text-primary); font-family: inherit; font-size: 14px; font-weight: 600; line-height: 22px; text-align: left; cursor: pointer; }
+.strategy-insight__icon { display: block; flex: 0 0 20px; width: 20px; height: 20px; background: var(--insight-color); mask: var(--insight-icon) center / contain no-repeat; -webkit-mask: var(--insight-icon) center / contain no-repeat; }
+.strategy-insight__arrow { display: block; flex: 0 0 12px; width: 12px; height: 12px; margin-left: auto; background: var(--insight-color); mask: url("./assets/rank-more.svg") center / contain no-repeat; -webkit-mask: url("./assets/rank-more.svg") center / contain no-repeat; transition: transform .15s ease; }
+.strategy-insight__heading:hover .strategy-insight__arrow { transform: translateX(2px); }
+.strategy-insight ul { display: grid; gap: 5px; margin: 0; padding: 0; list-style: none; color: var(--text-muted); font-size: 13px; font-weight: 400; line-height: 21px; }
+.strategy-insight li { position: relative; padding-left: 10px; }
+.strategy-insight li::before { position: absolute; top: 9px; left: 0; width: 3px; height: 3px; border-radius: 50%; background: #a7b0c0; content: ""; }
+.strategy-insight strong { color: var(--text-secondary); font-weight: 600; }
+.ai-conclusion { margin-top: 12px; padding: 12px 14px; border: 1px solid transparent; border-radius: 12px; background: linear-gradient(94deg, rgb(255 145 36 / 8%) 0%, rgb(255 16 128 / 8%) 53.365%, rgb(66 196 255 / 8%) 100%) padding-box, linear-gradient(#fff, #fff) padding-box, linear-gradient(94deg, #ff9124 0%, #ff1080 53.365%, #42c4ff 100%) border-box; }
+.ai-conclusion p { margin: 0; color: var(--text-primary); font-size: 14px; font-weight: 400; line-height: 24px; }
+.ai-conclusion strong { font-weight: 600; }
+.strategy-tooltip { width: 272px; max-width: calc(100vw - 72px); font-family: "PingFang SC", "Microsoft YaHei", sans-serif; white-space: normal; }
+.strategy-tooltip__header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.strategy-tooltip__title { min-width: 0; color: var(--text-primary); font-size: 16px; font-weight: 600; line-height: 24px; }
+.strategy-tooltip__badge { flex-shrink: 0; padding: 3px 8px; border: 1px solid color-mix(in srgb, var(--status-color) 35%, white); border-radius: 6px; background: color-mix(in srgb, var(--status-color) 7%, white); color: var(--status-color); font-size: 12px; font-weight: 600; line-height: 20px; }
+.strategy-tooltip dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px 16px; margin: 0; font-size: 14px; line-height: 22px; }
+.strategy-tooltip dt { color: var(--text-muted); font-weight: 400; }
+.strategy-tooltip dd { margin: 0; color: var(--text-primary); font-weight: 600; text-align: right; }
+.strategy-tooltip .strategy-tooltip__score { color: #bc550b; }
+.strategy-tooltip .strategy-tooltip__missing { color: var(--text-annotation); font-weight: 400; }
+.strategy-tooltip__breakdown { font-size: 13px; }
+.strategy-tooltip__date { display: block; margin-bottom: 2px; color: var(--text-muted); font-size: 12px; font-weight: 400; line-height: 18px; }
+.strategy-tooltip__change { font-size: 13px; }
+.strategy-tooltip__unit { font-size: 12px; }
+.chart-unavailable { display: grid; place-items: center; color: var(--text-muted); font-size: 13px; }
+
+/* 窄桌面优先保留图表的阅读宽度，不横向挤压气泡和分析文案。 */
+@container analysis (max-width: 780px) {
+  .strategy-layout { grid-template-columns: minmax(0, 1fr); }
+  .strategy-insights { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: none; }
+}
+@container analysis (max-width: 540px) {
+  .strategy-insights { grid-template-columns: minmax(0, 1fr); }
+  .strategy-legend { justify-content: flex-start; }
+}
+@media (max-width: 1250px) {
+  .competition-layout { grid-template-columns: minmax(0, 1fr); }
+  .ranking-card { width: 480px; max-width: 100%; }
+}
+
+/* ==================== 06 战略定位分析详情 ==================== */
+.strategy-detail { position: fixed; inset: 0 0 0 auto; width: min(440px, 100vw); max-width: 100vw; height: 100vh; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0; border-radius: 16px 0 0 16px; background: #fff; color: var(--text-primary); box-shadow: -12px 0 40px rgb(17 24 39 / 8%); font-family: inherit; font-weight: 400; }
+.strategy-detail::backdrop { background: rgb(17 24 39 / 24%); }
+.strategy-detail[open] { display: flex; flex-direction: column; animation: strategy-detail-enter .22s ease-out; }
+.strategy-detail__header { display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; gap: 16px; padding: 20px 20px 12px; }
+.strategy-detail__header h2 { margin: 0; font-size: 18px; font-weight: 600; line-height: 28px; }
+.strategy-detail__close { display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.strategy-detail__body { min-height: 0; padding: 8px 20px 24px; overflow: auto; }
+.strategy-detail__intro { margin: 0 0 16px; color: var(--text-muted); font-size: 13px; line-height: 22px; }
+.strategy-detail__table { width: 100%; border-collapse: separate; border-spacing: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 10px; font-size: 13px; line-height: 21px; text-align: left; }
+.strategy-detail__table caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.strategy-detail__table th, .strategy-detail__table td { padding: 12px 10px; }
+.strategy-detail__table thead { background: #f2f5fe; color: var(--text-secondary); }
+.strategy-detail__table th { font-weight: 600; }
+.strategy-detail__table tbody tr + tr > * { border-top: 1px solid var(--border); }
+.strategy-detail__table th span { color: var(--text-muted); font-size: 12px; font-weight: 400; }
+.strategy-detail__item { padding: 16px; border-radius: 12px; background: #f5f7fa; }
+.strategy-detail__item + .strategy-detail__item { margin-top: 12px; }
+.strategy-detail__item h3 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+.strategy-detail__item p { margin: 0; color: var(--text-secondary); font-size: 13px; line-height: 22px; }
+.strategy-insight__heading:focus-visible, .bubble-help__trigger:focus-visible, .strategy-detail__close:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; border-radius: 4px; }
+@keyframes strategy-detail-enter { from { transform: translateX(30px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .strategy-detail[open] { animation: none; } .strategy-insight__arrow, .bubble-help__text { transition: none; } }
+
+/* ==================== 07 格局变化：竞争圈、排名走势与事件标签 ==================== */
+.trend-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 4px 0 12px; }
+.trend-period { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; }
+.trend-period h2 { margin: 0; color: var(--text-primary); font-size: 14px; font-weight: 600; line-height: 22px; }
+.trend-period > span { color: var(--text-muted); font-size: 12px; font-weight: 400; line-height: 20px; }
+/* Figma 3102:6176：独立标签，无共用底板及选中投影。 */
+.trend-modes { display: flex; align-items: center; flex-shrink: 0; gap: 7px; }
+.trend-mode { display: flex; align-items: center; justify-content: center; padding: 6px 13px; border: 0; border-radius: 52px; background: #f7f8fb; color: #4b5563; font-family: inherit; font-size: 12px; font-weight: 600; line-height: 16px; white-space: nowrap; cursor: pointer; }
+.trend-mode.is-selected { background: var(--primary-light); color: var(--primary); }
+.trend-chart-scroll { width: 100%; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; scrollbar-color: #dce3ed transparent; }
+.trend-chart { width: 100%; min-width: 660px; height: 450px; }
+.trend-legend { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; margin: 12px 0 0; padding: 0 4px; list-style: none; color: var(--text-muted); font-size: 12px; font-weight: 400; line-height: 20px; }
+.trend-legend li { display: flex; align-items: center; gap: 7px; }
+.trend-line-key { position: relative; width: 18px; height: 3px; border-radius: 2px; background: var(--line-color); }
+.trend-line-key::after { position: absolute; top: -2px; left: 6px; width: 7px; height: 7px; border-radius: 50%; background: var(--line-color); content: ""; }
+.trend-line-key--normal { --line-color: #315eef; }
+.trend-line-key--decrease { --line-color: #05b37f; }
+.trend-line-key--increase { --line-color: #e34c4c; }
+.trend-line-key--new { --line-color: #9852ef; }
+.trend-scope-note { margin: 14px 0 0; padding: 10px 12px; border-radius: 8px; background: #f7f9fc; color: var(--text-muted); font-size: 12px; font-weight: 400; line-height: 20px; }
+.trend-scope-note strong { color: var(--text-secondary); font-weight: 600; }
+.trend-tooltip .strategy-tooltip__header { align-items: flex-start; margin-bottom: 16px; }
+@container analysis (max-width: 600px) { .trend-toolbar { align-items: flex-start; } .trend-period { flex-direction: column; } }
