@@ -592,16 +592,18 @@ strong,b{font-weight:600}.analysis-body{display:grid;gap:16px}.trigger-banner{di
 .recommend-overview .timeline-legend>span:first-child{grid-column:1/-1}
 
 /* 用户指定涨跌语义：提价红、降价绿，采用 UI 规范标准色。 */
-.recommend .level1,.recommend .level2,.recommend .level3{background:#e21818;color:#fff}
-.recommend .decrease1,.recommend .decrease2,.recommend .decrease3{background:#05b37f;color:#fff}
+/* 色深由 app.js 按涨、跌各自最大幅度计算；此处仅提供规范色兜底。 */
+.recommend .level1,.recommend .level2,.recommend .level3{--adjustment-color:#E21818}
+.recommend .decrease1,.recommend .decrease2,.recommend .decrease3{--adjustment-color:#05B37F}
+.recommend .level1,.recommend .level2,.recommend .level3,.recommend .decrease1,.recommend .decrease2,.recommend .decrease3{background:var(--adjustment-color);color:#fff}
 .price-table .price,.price-table .delta,.decision-slot-table strong,.decision-slot-table small{color:#e21818}
 .price-table .price-decrease .price,.price-table .price-decrease .delta,.decision-slot-table .price-decrease strong,.decision-slot-table .price-decrease small{color:#05b37f}
 
 /* 分时幅度置于细色线上方，数字用统一 Oswald 字体。 */
 .recommend-overview .timeline-24{height:6px;margin-top:50px;overflow:visible;border-radius:0;gap:2px}
 .recommend-overview .time-segment{position:relative;height:6px;border-radius:3px}
-.recommend-overview .time-segment__value{position:absolute;left:50%;bottom:15px;transform:translateX(-50%);white-space:nowrap;font:600 22px/28px var(--font-number);color:#e21818}
-.recommend-overview .decrease1 .time-segment__value,.recommend-overview .decrease2 .time-segment__value,.recommend-overview .decrease3 .time-segment__value{color:#05b37f}
+.recommend-overview .time-segment__value{position:absolute;left:50%;bottom:15px;transform:translateX(-50%);white-space:nowrap;font:600 22px/28px var(--font-number);color:var(--adjustment-color,#e21818)}
+.recommend-overview .decrease1 .time-segment__value,.recommend-overview .decrease2 .time-segment__value,.recommend-overview .decrease3 .time-segment__value{color:var(--adjustment-color)}
 .recommend-overview .hold .time-segment__value{font:400 11px/28px 'PingFang SC',sans-serif;color:#667085}
 .recommend-overview .time-axis{margin-top:10px}
 .recommend-overview{container:price-distribution / inline-size}

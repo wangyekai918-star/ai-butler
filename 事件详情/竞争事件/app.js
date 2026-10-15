@@ -14,12 +14,29 @@
     ]
   };
   const timeline = document.getElementById("price-timeline");
+  // 涨、跌分别按当前数据中的最大绝对幅度归一化，最大值使用规范最深色。
+  const deltas = snapshot.periods.map(period => Number((period.recommended - period.current).toFixed(2)));
+  const maxIncrease = Math.max(0, ...deltas);
+  const maxDecrease = Math.max(0, ...deltas.map(delta => -delta));
+  const adjustmentColor = delta => {
+    const maximum = delta > 0 ? maxIncrease : maxDecrease;
+    const ratio = maximum ? Math.min(1, Math.abs(delta) / maximum) : 0;
+    const base = delta > 0 ? [226, 24, 24] : [5, 179, 127];
+    const whiteMix = 0.72 * (1 - ratio);
+    return `rgb(${base.map(channel => Math.round(channel + (255 - channel) * whiteMix)).join(", ")})`;
+  };
+  document.querySelectorAll(".timeline-legend .swatch:not(.hold)").forEach(swatch => {
+    const label = swatch.parentElement.textContent.replace("−", "-");
+    const delta = Number.parseFloat(label);
+    if (Number.isFinite(delta) && delta !== 0) swatch.style.setProperty("--adjustment-color", adjustmentColor(delta));
+  });
   snapshot.periods.forEach(period => {
     const delta = Number((period.recommended - period.current).toFixed(2));
     const label = delta === 0 ? "维持现价" : `${delta > 0 ? "+" : "−"}${Math.abs(delta).toFixed(2)}`;
     const segment = document.createElement("div");
     const tone = delta === 0 ? "hold" : `${delta < 0 ? "decrease" : "level"}${Math.min(3, Math.max(1, Math.round(Math.abs(delta) * 100)))}`;
     segment.className = `time-segment ${tone}`;
+    if (delta !== 0) segment.style.setProperty("--adjustment-color", adjustmentColor(delta));
     segment.style.flex = String(period.hours);
     const value = document.createElement("span");
     value.className = "time-segment__value";
