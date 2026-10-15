@@ -1,6 +1,6 @@
 # AI 管家 · 事件详情
 
-包含调价策略、促销策略、经营机会、社会事件与通知决策五类高保真 Demo，按场景独立维护。
+包含调价策略、促销策略、经营机会、社会事件、通知决策与竞争事件六类高保真 Demo，按场景独立维护。
 
 [全部 Demo 在线入口](https://wangyekai918-star.github.io/ai-butler/) · [仓库说明](../README.md)
 
@@ -11,5 +11,6 @@
 | 经营机会 | 通过五步分析评估经营机会，形成调价建议并跟踪效果。 | [在线演示](https://wangyekai918-star.github.io/ai-butler/%E4%BA%8B%E4%BB%B6%E8%AF%A6%E6%83%85/%E7%BB%8F%E8%90%A5%E6%9C%BA%E4%BC%9A/%E7%BB%8F%E8%90%A5%E6%9C%BA%E4%BC%9A.html) | [目录](./经营机会/) |
 | 社会事件 | 在多个电站间切换，查看事件影响、决策执行评估与决策复盘。 | [在线演示](https://wangyekai918-star.github.io/ai-butler/%E4%BA%8B%E4%BB%B6%E8%AF%A6%E6%83%85/%E7%A4%BE%E4%BC%9A%E4%BA%8B%E4%BB%B6/%E7%A4%BE%E4%BC%9A%E4%BA%8B%E4%BB%B6.html) | [目录](./社会事件/) |
 | 经营风险 · 通知决策 | 完成异常分析与通知决策，展示通知内容和发送结果。 | [在线演示](https://wangyekai918-star.github.io/ai-butler/%E4%BA%8B%E4%BB%B6%E8%AF%A6%E6%83%85/%E7%BB%8F%E8%90%A5%E9%A3%8E%E9%99%A9_%E9%80%9A%E7%9F%A5%E5%86%B3%E7%AD%96/%E7%BB%8F%E8%90%A5%E9%A3%8E%E9%99%A9_%E9%80%9A%E7%9F%A5%E5%86%B3%E7%AD%96.html) | [目录](./经营风险_通知决策/) |
+| 竞争事件 | 六步竞争分析、分时涨跌推荐、策略生成与累计效果复盘。 | [在线演示](https://wangyekai918-star.github.io/ai-butler/事件详情/竞争事件/竞争事件.html) | [目录](./竞争事件/) |
 
 每个 Demo 的 HTML、style.css、app.js 同级存放，资源位于各自的 assets/；页面说明见各 Demo 的 README.md。
