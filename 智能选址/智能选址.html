@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>智能选址 — AI 管家</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="./style.css?v=20261104-export-scroll">
+    <script src="./assets/vendor/echarts.min.js" defer></script>
+    <script src="./app.js?v=20261104-export-scroll" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar" aria-label="AI 管家顶部导航">
+        <div class="topbar__left">
+          <div class="brand">
+            <img class="brand__logo" src="./assets/ai-butler-logo@3x.png" width="133" height="36" alt="AI管家 · 充电运营数字员工" draggable="false">
+          </div>
+          <div class="organization">
+            <span>济南特来电新能源有限公司</span>
+            <img class="icon icon--16" src="./assets/switch-app.svg" width="16" height="16" alt="" draggable="false">
+          </div>
+        </div>
+        <div class="topbar__right">
+          <div class="notification" aria-label="消息，2 条未读">
+            <img class="icon icon--22" src="./assets/notification.svg" width="22" height="22" alt="" draggable="false">
+            <span class="notification__badge" aria-hidden="true">2</span>
+          </div>
+          <span class="feedback">反馈</span>
+          <div class="user">
+            <span class="user__avatar" aria-hidden="true">运</span>
+            <span>运营人员</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="workspace">
+        <aside class="sidebar">
+          <nav aria-label="功能导航">
+            <!-- 本阶段仅展示导航外观，不提供点击、悬浮或键盘交互。 -->
+            <ul class="nav-list">
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-home.svg" width="18" height="18" alt="" draggable="false"><span>首页</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-ai-assistant.svg" width="18" height="18" alt="" draggable="false"><span>AI助理</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-diagnosis.svg" width="18" height="18" alt="" draggable="false"><span>经营诊断</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-price.svg" width="18" height="18" alt="" draggable="false"><span>智慧价格</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-promotion.svg" width="18" height="18" alt="" draggable="false"><span>促销经营</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-surroundings.svg" width="18" height="18" alt="" draggable="false"><span>周边态势</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-site.svg" width="18" height="18" alt="" draggable="false"><span>现场托管</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-equipment.svg" width="18" height="18" alt="" draggable="false"><span>设备健康</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-safety.svg" width="18" height="18" alt="" draggable="false"><span>充电安全</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-customer-service.svg" width="18" height="18" alt="" draggable="false"><span>客服托管</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-public-opinion.svg" width="18" height="18" alt="" draggable="false"><span>舆情托管</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-value.svg" width="18" height="18" alt="" draggable="false"><span>价值评估</span></li>
+              <li class="nav-item nav-item--selected" aria-current="page"><img class="icon icon--18" src="./assets/nav-site-selection.svg" width="18" height="18" alt=""><span>智能选址</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-system.svg" width="18" height="18" alt="" draggable="false"><span>系统托管</span></li>
+            </ul>
+          </nav>
+        </aside>
+
+<main class="content" aria-label="智能选址"><nav class="page-tabs" aria-label="智能选址工作区"><button class="ptab on" data-htab="explore" aria-selected="true" type="button">找建站区域</button><button class="ptab" data-htab="assess" aria-selected="false" type="button">评估已有场地</button><button class="ptab" data-htab="tasks" aria-selected="false" type="button">选址任务</button><span class="nav-helper">从区域机会，到场地决策</span></nav>    <!-- ========== 屏1：新建选址任务首页（R10：双入口大卡 → 页级双 Tab） ========== -->
+    <section class="view active" id="view-home">
+      <!-- R10：原双入口大卡与页头标题合并为页级双 Tab（开始范围选址 / 评估意向场地） -->
+      <!-- Tab 1 · 开始范围选址：新建选址任务表单 + 范围预览地图（原配置页内容，标题条已去除） -->
+      <div class="ptab-panel on permanent-split unified-selection" id="panel-explore" role="tabpanel" aria-labelledby="ptabExplore"><div class="exp-grid" id="expGrid"><div class="range-map-panel"><div class="card map-card selection-map"><div class="mapbox"><div class="map-scope-bar" id="rangeMethod"><div class="map-scope-heading"><button class="result-task-back" id="resultTaskBack" type="button" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>返回</button><h3 id="mapScopeTitle">选址范围</h3><span id="mapScopeStatus">按行政区查找</span><button class="btn sm result-edit" id="resultEditConditions" type="button" hidden>修改条件</button></div><div class="result-conditions" hidden><div id="resultDemandSummary" class="result-demand-tags" aria-label="已选建站需求"></div></div><div class="map-scope-actions">
+              <div class="geo-sel" id="geoSel">
+                <button class="geo-trigger" id="geoTrigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+                  <img class="ui-icon" src="./assets/control-5c067deca0.svg" alt="">
+                  <span class="txt" id="geoTriggerTxt">济南市 / 全部区县</span>
+                  <img class="ui-icon" src="./assets/control-7a928ef041.svg" alt="">
+                </button>
+                <button class="scope-reset" id="resetRangeScope" type="button" aria-label="清除自定义范围，恢复行政区选择" title="清除自定义范围" hidden><img class="ui-icon" src="./assets/control-3550bc75bd.svg" alt=""></button>
+                <div class="geo-panel" id="geoPanel" role="dialog" aria-label="选择省 / 市 / 区县">
+                  <div class="geo-col">
+                    <div class="geo-col-t">省份</div>
+                    <div class="geo-opts" id="geoProv"></div>
+                  </div>
+                  <div class="geo-col">
+                    <div class="geo-col-t">城市</div>
+                    <div class="geo-opts" id="geoCity"></div>
+                  </div>
+                  <div class="geo-col wide">
+                    <div class="geo-col-t">区县 <span>单选 · 可选全部</span></div>
+                    <div class="geo-opts" id="geoDist"></div>
+                  </div>
+                </div>
+              </div>
+
+          <button class="btn scope-draw-button" id="chipCustom" type="button"><span class="ui-icon icon-map-pick" aria-hidden="true"></span><span>地图圈选</span></button></div><span class="draw-toolbar" id="cfgDrawTools" style="display:none">
+              <span class="hd-note">按住拖动画出圆形范围 · 重画将替换现有圈</span>
+              <button class="btn sm" id="cfgDrawExit">退出绘制</button>
+            </span></div>
+                    <svg id="cityMap" class="map-state-bridge" viewBox="0 0 1040 720" aria-hidden="true"><g id="lyPlatform"></g><g id="lyRival"></g><g id="lyRegions" class="g-off"></g><g id="lyHeat" class="g-off"></g><g id="lyPrice" class="g-off"></g></svg><div id="site-geo-map" class="geo-map" role="img" aria-label="选址地图"></div>
+                    <!-- R4：自定义范围分析 loading 遮罩（三阶段过渡） -->
+                    <div class="map-loading" id="mapLoading"><span class="spin"></span><span id="mapLoadingTxt">正在分析自定义范围…</span></div>
+            <!-- R11：图例/图层开关浮于地图左下角（不单开模块）；绘制工具条浮于右上角 -->
+            <div class="map-legend" id="mapLegend">
+              <button class="lyr on" data-layer="lyPlatform"><i style="background:#5b8bff"></i>平台站</button>
+              <button class="lyr on" data-layer="lyRival"><i style="background:#8b96ad"></i>友商站</button>
+              <button class="lyr" style="display:none" data-layer="lyRegions" id="lyrRegions"><i style="background:#315EEF"></i>推荐区域 5</button>
+              <button class="lyr" style="display:none" data-layer="lyHeat"><i style="background:rgba(255,122,26,.7)"></i>需求热力</button>
+              <button class="lyr" style="display:none" data-layer="lyPrice"><i style="background:rgba(91,139,255,.7)"></i>价格热力</button>
+            </div>
+
+
+
+          </div></div></div></div><div class="card" id="expResultCard" style="display:none">
+
+                    <div class="card-head"><h3>推荐区域</h3><span class="hd-note">按综合评分排序</span>
+                      <button class="btn sm" id="btnExportAll" style="margin-left:auto">
+                        <img class="ui-icon" src="./assets/control-662ebc5124.svg" alt="">导出全部报告
+                      </button>
+                    </div>
+                    <div class="rgn-list" id="rgnList"></div>
+                  </div><div class="card config-card demand-panel" id="cfgCard">
+        <div class="card-head demand-heading"><div><h3>建站需求</h3><p>确定范围后，设置建站需求</p></div><button class="cfg-fold" id="cfgFold" type="button" aria-expanded="true" aria-controls="cfgForm"><span id="cfgFoldTxt">收起需求</span><img class="ui-icon" src="./assets/control-c285e115b8.svg" alt=""></button></div>
+        <div class="analysis-summary" id="analysisSummary" hidden></div>
+        <div class="cfg-form" id="cfgForm">
+          <fieldset class="demand-section"><legend>准备建什么站？</legend>
+            <div class="choice-cards" id="cfgType">
+              <label class="choice-card"><input type="radio" name="stationKind" value="public" checked><span><strong>公共快充站</strong><small>面向乘用车的公共充电需求</small></span></label>
+              <label class="choice-card"><input type="radio" name="stationKind" value="truck"><span><strong>重卡站</strong><small>面向重卡运输与物流补能需求</small></span></label>
+            </div>
+            <div id="truckOptions" class="truck-options" hidden><span class="demand-label">重卡选址方式</span><div id="truckMethod" class="radio-inline"><label class="area-method-tip" tabindex="0" aria-describedby="areaMethodTip"><input type="radio" name="truckMethod" value="重卡站(区域选址)" checked>区域选址<span class="route-tooltip" id="areaMethodTip" role="tooltip">在指定区域内寻找适合重卡补能的位置</span></label><label class="route-unavailable" tabindex="0" aria-disabled="true" aria-describedby="routeUnavailableTip"><input type="radio" name="truckMethod" value="重卡站(路线选址)" disabled>路线选址<span class="route-tooltip" id="routeUnavailableTip" role="tooltip">路线选址暂未开放，请使用区域选址。</span></label></div></div>
+          </fieldset>
+          <fieldset class="demand-section"><legend>这次建站更看重什么？</legend><div class="choice-cards" id="cfgGoal">
+            <label class="choice-card"><input type="radio" name="rangeGoal" value="rev" checked><span><strong>经营收益</strong><small>关注市场需求与投资回报</small></span></label>
+            <label class="choice-card"><input type="radio" name="rangeGoal" value="cov"><span><strong>网络覆盖</strong><small>关注充电网络的覆盖空白</small></span></label>
+            <label class="choice-card"><input type="radio" name="rangeGoal" value="brand"><span><strong>品牌示范</strong><small>关注区域影响力与示范价值</small></span></label>
+          </div></fieldset>
+          <fieldset class="demand-section investment-options" id="investmentOptions"><legend>投资与规模</legend><div class="investment-fields">
+            <div class="field"><label for="cfgBudget">投资预算</label><select class="sel" id="cfgBudget"><option value="≤100万">≤100万</option><option value="100-200万" selected>100-200万</option><option value="200-300万">200-300万</option><option value="≥300万">≥300万</option><option value="不限">不限</option></select></div>
+            <div class="field"><label for="cfgScale">计划建设规模</label><select class="sel" id="cfgScale"></select></div>
+            <div class="field"><label for="cfgPayback">期望回收周期</label><select class="sel" id="cfgPayback"><option value="3-4 年">3-4 年</option><option value="4-5 年" selected>4-5 年</option><option value="5-8 年">5-8 年</option><option value="不限">不限</option></select></div>
+          </div></fieldset>
+        </div>
+        <div class="config-actions"><button class="btn btn-orange" id="btnStart"><img class="ui-icon" id="btnStartIco" src="./assets/control-15a9430f21.svg" alt=""><span id="btnStartTxt">查找推荐区域</span></button></div>
+      </div>
+      </div><!-- /#panel-explore -->
+
+      <!-- Tab 2 · 评估意向场地（R10：进来直接配置场地条件，填完即评；候选库收在下方作快捷入口） -->
+      <div class="ptab-panel" id="panel-assess" role="tabpanel" aria-labelledby="ptabAssess">
+        <div class="card config-card" id="assessCfgCard">
+          <div class="card-head" style="border-bottom:0">
+            <h3>场地评估配置</h3>
+
+          </div>
+          <div class="cfg-form">
+            <div class="field third">
+              <label>场地位置</label>
+              <div class="loc-box" id="asLocBar">
+                <img class="ui-icon" src="./assets/control-5dcc1805f9.svg" alt="">
+                <input class="ipt" id="asAddrSearch" placeholder="搜索地点名称或点击地图选点" autocomplete="off">
+                <button class="clear" id="asLocClear" type="button" style="display:none" aria-label="清空场地位置" title="清空"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+                <div class="loc-sugg" id="asSugg"></div>
+              </div>
+            </div>
+            <fieldset class="demand-section assess-choice-field"><legend>准备建什么站？</legend><div class="choice-cards" id="asType">
+              <label class="choice-card"><input type="radio" name="assessStationKind" value="公共快充站" checked><span><strong>公共快充站</strong><small>面向乘用车的公共充电需求</small></span></label>
+              <label class="choice-card"><input type="radio" name="assessStationKind" value="重卡站"><span><strong>重卡站</strong><small>面向重卡运输与物流补能需求</small></span></label>
+            </div></fieldset>
+            <fieldset class="demand-section assess-choice-field"><legend>这次建站更看重什么？</legend><div class="choice-cards" id="asGoal">
+            <label class="choice-card"><input type="radio" name="assessBuildGoal" value="rev" checked><span><strong>经营收益</strong><small>关注市场需求与投资回报</small></span></label>
+            <label class="choice-card"><input type="radio" name="assessBuildGoal" value="cov"><span><strong>网络覆盖</strong><small>关注充电网络的覆盖空白</small></span></label>
+            <label class="choice-card"><input type="radio" name="assessBuildGoal" value="brand"><span><strong>品牌示范</strong><small>关注区域影响力与示范价值</small></span></label>
+          </div></fieldset>
+          <fieldset class="demand-section investment-options" id="assessInvestmentOptions"><legend>投资与规模</legend><div class="investment-fields">
+            <div class="field third">
+              <label>场地面积 <span>㎡</span></label>
+              <input class="ipt" id="asArea" type="number" min="30" step="1" placeholder="如：350（约 12 个桩位）">
+              <div class="area-tip" id="asAreaTip"></div>
+            </div>
+            <div class="field third">
+              <label>年租金 <span>万元 / 年</span></label>
+              <input class="ipt" id="asRent" type="number" min="0" step="0.1" placeholder="如：12">
+            </div>
+            <div class="field third">
+              <label>投资预算</label>
+              <select class="sel" id="asBudget">
+                <option value="≤100万">≤100万</option>
+                <option value="100-200万" selected>100-200万</option>
+                <option value="200-300万">200-300万</option>
+                <option value="≥300万">≥300万</option>
+                <option value="不限">不限</option>
+              </select>
+            </div>
+          </div></fieldset>
+            </div>
+        <div class="config-actions"><button class="btn btn-green" id="btnAssessStart">
+              <span class="ui-icon icon-assessment" aria-hidden="true"></span>
+              开始可行性评估
+            </button></div>
+        </div>
+
+        <!-- 候选场地库地图（R10：卡片网格改地图点位，兼作「地图选点」画布；R11：标题条/搜索框移除） -->
+        <div class="card cfg-map selection-map">
+          <div class="mapbox"><svg id="asMap" class="map-state-bridge" viewBox="0 0 1040 720" aria-hidden="true"></svg><div id="assess-geo-map" class="geo-map" role="img" aria-label="场地位置地图"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 屏1.5：选址任务列表 ========== -->
+    <section class="view" id="view-tasks">
+      <div class="card task-list-card">
+        <div class="task-list-toolbar">
+          <button class="btn btn-orange" data-go="config" type="button">
+            <img class="ui-icon" src="./assets/control-87d6e742b6.svg" alt="">新建选址任务
+          </button>
+        </div>
+        <div class="task-table-container">
+        <table class="tbl">
+          <thead><tr><th>任务名称</th><th>建站目标</th><th>寻址范围</th><th>类型 · 规模</th><th class="r">推荐区域</th><th>状态</th><th>创建时间</th><th>操作</th></tr></thead>
+          <tbody id="taskListBody"></tbody>
+        </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 屏2：意向场地评估（R10：选场地步骤已并入首页 Tab2，本屏为研判与结论报告） ========== -->
+    <section class="view" id="view-assess">
+      <div class="card region-report-header">
+        <button class="result-task-back" data-go="home" type="button" title="返回评估结果" aria-label="返回评估结果"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>返回</button>
+        <h1>场地评估报告</h1>
+        <button class="btn sm" id="btnExport"><img class="ui-icon" src="./assets/control-662ebc5124.svg" alt="">导出报告</button>
+      </div>
+      <aside class="card" id="assessHeadCard">
+        <h3 class="region-candidates-title">评估场地</h3>
+        <div class="rd-tabs" id="assessReportContext"></div>
+        <p class="report-context-meta" id="assessEntity">请选择意向场地</p>
+      </aside>
+      <nav class="card rp-anchor region-report-nav" id="rpAnchor" aria-label="场地报告目录" hidden><ol class="lifecycle-list"><li class="lifecycle-step lifecycle-step--active"><a class="lifecycle-link" href="#secConcl"><span class="lifecycle-step__number">01</span><span class="lifecycle-step__title">评估摘要</span></a></li><li class="lifecycle-step"><a class="lifecycle-link" href="#secBasis"><span class="lifecycle-step__number">02</span><span class="lifecycle-step__title">评分依据</span></a></li><li class="lifecycle-step"><a class="lifecycle-link" href="#secComp"><span class="lifecycle-step__number">03</span><span class="lifecycle-step__title">竞争格局</span></a></li><li class="lifecycle-step"><a class="lifecycle-link" href="#secTruck"><span class="lifecycle-step__number">04</span><span class="lifecycle-step__title">车流分析</span></a></li><li class="lifecycle-step"><a class="lifecycle-link" href="#secGap"><span class="lifecycle-step__number">05</span><span class="lifecycle-step__title">供需缺口</span></a></li><li class="lifecycle-step"><a class="lifecycle-link" href="#secRisk"><span class="lifecycle-step__number">06</span><span class="lifecycle-step__title">条件研判</span></a></li><li class="lifecycle-step"><a class="lifecycle-link" href="#secInv"><span class="lifecycle-step__number">07</span><span class="lifecycle-step__title">投资测算</span></a></li><li class="lifecycle-step"><a class="lifecycle-link" href="#secFinal"><span class="lifecycle-step__number">08</span><span class="lifecycle-step__title">选址策略</span></a></li></ol></nav>
+
+      <!-- 步骤2：研判与结论（融合报告页 · 全宽线性流） -->
+      <div class="region-report-main" id="astep2">
+
+        <!-- ① 评估摘要（与区域详情同构：五大数卡） -->
+        <section class="card rp-sec" id="secConcl">
+          <div class="rp-sec-head"><span class="rp-no">01</span><h3>评估摘要</h3></div>
+          <div class="kpi-grid cols-5" id="astSumBox"></div>
+        </section>
+
+        <!-- 02 评分依据：五维雷达 + 指标表（与区域详情同构） -->
+        <section class="card rp-sec" id="secBasis">
+          <div class="rp-sec-head"><span class="rp-no">02</span><h3>评分依据</h3><span class="rp-note">五维雷达 · 满分 100</span></div>
+          <div class="rp-score-wrap">
+            <div class="rp-radar" id="astRadar"></div>
+            <table class="rp-ct" id="astBasisTab"></table>
+          </div>
+        </section>
+
+        <!-- R13：共享报告区块复用（与区域详情同一套组件，口径为场地周边 3 公里） -->
+        <section class="card rp-sec" id="secComp">
+          <div class="rp-sec-head"><span class="rp-no">03</span><h3>竞争格局</h3><span class="rp-note">评估口径：场地周边 3 公里</span></div>
+          <p class="rp-text" id="astCompText"></p>
+          <div class="kpi-grid" id="astPatMetrics" style="margin-bottom:12px"></div>
+          <div class="rp-ch-box" style="margin-bottom:12px"><h6>运营商分布（Top 10） <span class="tag tag-tested"><i></i>实测</span></h6><div id="astChartOps"></div></div>
+          <div class="rp-ch-grid">
+            <div class="rp-ch-box"><h6>服务费价格分布 <span class="tag tag-tested"><i></i>实测</span></h6><div class="chart-wrap" id="astChartPrice"></div></div>
+            <div class="rp-ch-box"><h6>运营商规模分布 <span class="tag tag-tested"><i></i>实测</span></h6><div class="chart-wrap" id="astChartScale"></div></div>
+          </div>
+        </section>
+
+        <section class="card rp-sec" id="secTruck">
+          <div class="rp-sec-head"><span class="rp-no">04</span><h3>车流分析</h3><span class="rp-note">基于场地周边 3 公里范围内地图地理车流大数据</span></div>
+          <div id="astTruck"></div>
+        </section>
+
+        <section class="card rp-sec" id="secGap">
+          <div class="rp-sec-head"><span class="rp-no">05</span><h3>供需缺口</h3></div>
+          <p class="rp-text" id="astGapText"></p>
+          <div class="rp-ch-grid">
+            <div class="rp-ch-box"><h6>高峰时段分布 <span class="tag tag-model"><i></i>模型估算</span></h6><div class="chart-wrap" id="astChartGap"></div></div>
+            <div class="rp-ch-box"><h6>客群结构 <span class="tag tag-model"><i></i>模型估算</span></h6><div class="chart-wrap" id="astChartCust"></div></div>
+          </div>
+        </section>
+
+        <!-- 06 条件研判（与区域详情同构：三态清单） -->
+        <section class="card rp-sec" id="secRisk">
+          <div class="rp-sec-head"><span class="rp-no">06</span><h3>条件研判</h3><span class="rp-note">各项硬条件以现场核实与补充材料为准</span></div>
+          <div class="cond-list" id="astCondList"></div>
+        </section>
+
+        <section class="card rp-sec" id="secInv">
+          <div class="rp-sec-head"><span class="rp-no">07</span><h3>投资测算</h3><span class="rp-note">静态模型 · 参数来自场地评估配置</span></div>
+          <div class="inv-grid" id="astInvGrid"></div>
+          <div class="rp-ch-grid" style="margin-top:14px">
+            <div class="rp-ch-box"><h6>投资成本估算 <span class="tag tag-model"><i></i>模型估算</span></h6><div id="astInvCapexTab"></div></div>
+            <div class="rp-ch-box"><h6>年度运营成本估算 <span class="tag tag-model"><i></i>模型估算</span></h6><div id="astInvOpexTab"></div></div>
+          </div>
+          <div class="inv-foot"><span>金额「待补充」的分项以场地实际报价为准，补充后测算将自动更新。</span></div>
+        </section>
+
+        <!-- 08 选址策略与下一步建议（与区域详情同构：评分 + 等级说明 + 推荐理由与风险提示） -->
+        <section class="card rp-sec" id="secFinal">
+          <div class="rp-sec-head"><span class="rp-no">08</span><h3>选址策略与下一步建议</h3></div>
+          <div class="fin-adv" id="astFinAdv">
+            <div class="score-hero">
+              <div class="s-label">场地投资建议评分</div>
+              <div class="s-num fa-score">0</div>
+              <div class="s-grade fa-grade"></div>
+              <p class="s-text fa-text"></p>
+            </div>
+            <div class="blk-title"><span class="pin">✦</span>投资建议等级说明</div>
+            <table class="rp-ct fa-grades"></table>
+            <div class="rp-why-grid">
+              <div class="rp-why"><h6><span class="tag tag-tested"><i></i>核心优势</span></h6><div id="astWhyList"></div></div>
+              <div class="rp-why risk"><h6><span class="tag tag-warn"><i></i>风险提示</span></h6><div id="astRiskList"></div></div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+    <!-- ========== 屏5：区域详情页（R11：返回键回首页范围选址） ========== -->
+    <section class="view" id="view-region">        <div class="card region-report-header"><button class="result-task-back" data-go="config" type="button" title="返回选址"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>返回</button><h1>区域推荐报告</h1><button class="btn sm" id="btnRdExport"><img class="ui-icon" src="./assets/control-662ebc5124.svg" alt="">导出报告</button></div>
+      <!-- R7：顶部长条 + 下方信息块真合并；本屏唯一主标题 = 长条 h1 -->
+      <aside class="card page-head-card sep" id="rdHeadCard">
+
+        <h3 class="region-candidates-title">推荐区域</h3><div class="rd-tabs" id="rdTabs" aria-label="切换候选点"></div>
+      </aside>
+
+      <!-- R11：详情页按《智能选址·区域推荐报告 V3》十段结构重构 -->
+      <section class="card rp-sec">
+        <div class="rp-sec-head"><span class="rp-no">01</span><h3>评估摘要</h3></div>
+        <div class="kpi-grid cols-5" id="rdSumBox"></div>
+      </section>
+
+      <section class="card rp-sec">
+        <div class="rp-sec-head"><span class="rp-no">02</span><h3>评分依据</h3></div>
+        <div class="rp-score-wrap">
+          <div class="rp-radar" id="rdRadar"></div>
+          <table class="rp-ct" id="rdChainTab"></table>
+        </div>
+      </section>
+
+      <section class="card rp-sec">
+        <div class="rp-sec-head"><span class="rp-no">03</span><h3>竞争格局</h3></div>
+        <p class="rp-text" id="rdCompText"></p>
+        <div class="kpi-grid" id="rdPatMetrics" style="margin-bottom:12px"></div>
+        <div class="rp-ch-box" style="margin-bottom:12px"><h6>运营商分布（Top 10） <span class="tag tag-tested"><i></i>实测</span></h6><div id="chartOps"></div></div>
+        <div class="rp-ch-grid">
+          <div class="rp-ch-box"><h6>服务费价格分布 <span class="tag tag-tested"><i></i>实测</span></h6><div class="chart-wrap" id="chartPrice"></div></div>
+          <div class="rp-ch-box"><h6>运营商规模分布 <span class="tag tag-tested"><i></i>实测</span></h6><div class="chart-wrap" id="chartScale"></div></div>
+        </div>
+      </section>
+
+      <!-- R12：车流分析（共享区块，markup 由 truckFlowHTML() 生成，挂载点 truckFlowR） -->
+      <section class="card rp-sec">
+        <div class="rp-sec-head"><span class="rp-no">04</span><h3>车流分析</h3><span class="rp-note">基于目标位置 3 公里范围内地图地理车流大数据</span></div>
+        <div id="truckFlowR"></div>
+      </section>
+
+      <section class="card rp-sec">
+        <div class="rp-sec-head"><span class="rp-no">05</span><h3>供需缺口</h3></div>
+        <p class="rp-text" id="rdGapText"></p>
+        <div class="rp-ch-grid">
+          <div class="rp-ch-box"><h6>高峰时段分布 <span class="tag tag-model"><i></i>模型估算</span></h6><div class="chart-wrap" id="chartGap"></div></div>
+          <div class="rp-ch-box"><h6>客群结构 <span class="tag tag-model"><i></i>模型估算</span></h6><div class="chart-wrap" id="chartCust"></div></div>
+        </div>
+      </section>
+
+      <section class="card rp-sec">
+        <div class="rp-sec-head"><span class="rp-no">06</span><h3>条件研判</h3><span class="rp-note">系统仅分析到区域级，具体电站位置与硬条件以现场核实为准</span></div>
+        <div class="cond-list" id="condList"></div>
+      </section>
+
+      <section class="card rp-sec">
+        <div class="rp-sec-head"><span class="rp-no">07</span><h3>投资测算</h3><span class="rp-note">静态模型 · 参数可编辑</span></div>
+        <div class="inv-grid" id="invGrid"></div>
+        <div class="rp-ch-grid" style="margin-top:14px">
+          <div class="rp-ch-box"><h6>投资成本估算 <span class="tag tag-model"><i></i>模型估算</span></h6><div id="invCapexTab"></div></div>
+          <div class="rp-ch-box"><h6>年度运营成本估算 <span class="tag tag-model"><i></i>模型估算</span></h6><div id="invOpexTab"></div></div>
+        </div>
+        <div class="inv-foot">
+          <span>金额「待补充」的分项在编辑建站方案中填写后自动重算（未填按 0 参与测算）。</span>
+          <button class="btn btn-primary sm" id="btnEditPlan" style="margin-left:auto">
+            <img class="ui-icon" src="./assets/control-79a885d5bf.svg" alt="">
+            编辑建站方案
+          </button>
+        </div>
+      </section>
+
+      <section class="card rp-sec">
+        <div class="rp-sec-head"><span class="rp-no">08</span><h3>选址策略与下一步建议</h3></div>
+        <div class="fin-adv" id="finAdvR">
+          <div class="score-hero">
+            <div class="s-label">综合投资建议评分</div>
+            <div class="s-num fa-score">0</div>
+            <div class="s-grade fa-grade"></div>
+            <p class="s-text fa-text"></p>
+          </div>
+          <div class="blk-title"><span class="pin">✦</span>投资建议等级说明</div>
+          <table class="rp-ct fa-grades"></table>
+          <div class="rp-why-grid">
+            <div class="rp-why"><h6><span class="tag tag-tested"><i></i>核心优势</span></h6><div id="rdWhyList"></div></div>
+            <div class="rp-why risk"><h6><span class="tag tag-warn"><i></i>风险提示</span></h6><div id="rdRiskList"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card rp-sec">
+        <div class="rp-sec-head"><span class="rp-no">09</span><h3>推荐区域对比</h3></div>
+        <table class="rp-ct rp-cmp" id="rdCmpTab"></table>
+      </section>
+    </section>
+
+</main></div></div><!-- toast 容器（读屏播报） -->
+<div id="toastBox" aria-live="polite" aria-atomic="false"></div>
+<!-- V3：推荐区域选中播报（读屏） -->
+<p id="rgnAnnounce" class="sr-only" role="status" aria-live="polite"></p>
+
+<!-- V3 P1：删除确认（E-3 降级：范围删除前说明将同时移除 N 个推荐区域） -->
+<div class="modal-mask" id="confirmModal" role="presentation">
+  <div class="modal modal-sm" role="alertdialog" aria-modal="true" aria-labelledby="confirmTitle" aria-describedby="confirmDesc">
+    <h4 id="confirmTitle">删除自定义范围</h4>
+    <p class="m-sub" id="confirmDesc"></p>
+    <div class="modal-btns">
+      <button class="btn" id="confirmNo">取消</button>
+      <button class="btn btn-primary" id="confirmYes">确认删除</button>
+    </div>
+  </div>
+</div>
+
+<!-- 编辑建站方案弹窗 -->
+<div class="modal-mask" id="planModal" role="presentation">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="planModalTitle" aria-describedby="planModalDesc">
+    <h4 id="planModalTitle">编辑建站方案
+      <button class="modal-close" id="planClose" aria-label="关闭"><img class="ui-icon" src="./assets/control-3550bc75bd.svg" alt=""></button>
+    </h4>
+    <div class="m-sub" id="planModalDesc">固定项由系统按容量／桩数／比例估算；金额「待补充」的科目请按实际填写（留空按 0 测算），修改后点击「重新测算」</div>
+    <div class="m-grid" style="max-height:56vh;overflow:auto;padding-right:4px">
+      <div class="field"><label for="pN">终端数 <span>台</span></label><input class="ipt num" id="pN" type="number" min="2" max="32" step="1"></div>
+      <div class="field"><label for="pP">单桩功率 <span>kW</span></label><input class="ipt num" id="pP" type="number" min="30" max="600" step="10"></div>
+      <div class="field"><label for="pFee">充电服务费 <span>元/kWh</span></label><input class="ipt num" id="pFee" type="number" min="0.1" max="1" step="0.01"></div>
+      <div class="field"><label for="pCoef">电量校准系数 <span>0.5-1.5</span></label><input class="ipt num" id="pCoef" type="number" min="0.5" max="1.5" step="0.05"></div>
+      <div class="field"><label for="pDeposit">场地一次性投入（押金）<span>万元</span></label><input class="ipt num" id="pDeposit" type="number" min="0" max="40" step="0.5"></div>
+      <div class="field"><label for="pUnit">单桩设备成本 <span>万元</span></label><input class="ipt num" id="pUnit" type="number" min="5" max="40" step="0.5"></div>
+      <div class="field"><label for="pCivil">土建工程费 <span>万元</span></label><input class="ipt num" id="pCivil" type="number" min="0" max="80" step="1"></div>
+      <div class="field"><label for="pOther">智能化配套 <span>万元</span></label><input class="ipt num" id="pOther" type="number" min="0" max="40" step="1"></div>
+      <div class="field"><label for="pRent">场地年租金 <span>万元/年</span></label><input class="ipt num" id="pRent" type="number" min="0" max="60" step="0.5"></div>
+      <div class="field"><label for="pLabor">人工＆保洁费 <span>万元/年</span></label><input class="ipt num" id="pLabor" type="number" min="0" max="20" step="0.2"></div>
+    </div>
+    <div class="modal-btns">
+      <button class="btn" id="planCancel">取消</button>
+      <button class="btn btn-primary" id="planCalc">
+        <img class="ui-icon" src="./assets/control-42e6e04328.svg" alt="">
+        重新测算
+      </button>
+    </div>
+  </div>
+</div>
+
+</body></html>
