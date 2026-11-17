@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>促销事件 — AI 管家事件详情</title>
+    <link rel="icon" href="data:,">
+    <link rel="preload" href="./assets/fonts/Oswald-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="./style.css?v=20261117-promotion-audience-emphasis">
+    <script src="./assets/vendor/echarts.min.js" defer></script>
+    <script src="./app.js?v=20261117-promotion-audience-emphasis" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar" aria-label="AI 管家顶部导航">
+        <div class="topbar__left">
+          <div class="brand">
+            <img class="brand__logo" src="./assets/ai-butler-logo@3x.png" width="133" height="36" alt="AI管家 · 充电运营数字员工" draggable="false">
+          </div>
+          <div class="organization">
+            <span>充电运营管理公司</span>
+            <img class="icon icon--16" src="./assets/switch-app.svg" width="16" height="16" alt="" draggable="false">
+          </div>
+        </div>
+        <div class="topbar__right">
+          <div class="notification" aria-label="消息，2 条未读">
+            <img class="icon icon--22" src="./assets/notification.svg" width="22" height="22" alt="" draggable="false">
+            <span class="notification__badge" aria-hidden="true">2</span>
+          </div>
+          <span class="feedback">反馈</span>
+          <div class="user">
+            <span class="user__avatar" aria-hidden="true">运</span>
+            <span>运营人员</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="workspace workspace--event-detail">
+        <aside class="sidebar">
+          <nav aria-label="功能导航">
+            <!-- 本阶段仅展示导航外观，不提供点击、悬浮或键盘交互。 -->
+            <ul class="nav-list">
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-home.svg" width="18" height="18" alt="" draggable="false"><span>首页</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-ai-assistant.svg" width="18" height="18" alt="" draggable="false"><span>AI助理</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-diagnosis.svg" width="18" height="18" alt="" draggable="false"><span>经营诊断</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-price.svg" width="18" height="18" alt="" draggable="false"><span>智慧价格</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-promotion.svg" width="18" height="18" alt="" draggable="false"><span>促销经营</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-surroundings.svg" width="18" height="18" alt="" draggable="false"><span>周边态势</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-site.svg" width="18" height="18" alt="" draggable="false"><span>现场托管</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-equipment.svg" width="18" height="18" alt="" draggable="false"><span>设备健康</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-safety.svg" width="18" height="18" alt="" draggable="false"><span>充电安全</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-customer-service.svg" width="18" height="18" alt="" draggable="false"><span>客服托管</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-public-opinion.svg" width="18" height="18" alt="" draggable="false"><span>舆情托管</span></li>
+              <li class="nav-item"><img class="icon icon--18" src="./assets/nav-value.svg" width="18" height="18" alt="" draggable="false"><span>价值评估</span></li>
+              <li class="nav-item nav-item--selected" aria-current="page"><img class="icon icon--18" src="./assets/nav-system-selected.svg" width="18" height="18" alt="" draggable="false"><span>系统托管</span></li>
+            </ul>
+          </nav>
+        </aside>
+
+        <main class="content" aria-labelledby="event-title">
+          <div class="event-heading">
+            <span class="back-label">
+              <img class="icon icon--16" src="./assets/back.svg" width="16" height="16" alt="" draggable="false">
+              <span>返回</span>
+            </span>
+            <h1 id="event-title">新用户复充促销事件</h1>
+          </div>
+          <div class="event-canvas">
+            <div class="event-sections">
+              <!-- 事件信息采用促销原型的单日经营风险示例；原型遗留的调价建议按促销场景修正。 -->
+              <section class="event-card" id="event-information" tabindex="-1" aria-labelledby="information-title">
+                <header class="event-card__heading">
+                  <span class="section-number metric-number" aria-hidden="true">01</span>
+                  <h2 id="information-title">事件信息</h2>
+                  <span class="status-tag status-tag--risk">促销事件</span>
+                </header>
+
+                <div class="event-information__body">
+                  <dl class="event-fields">
+                    <div class="event-field event-field--name">
+                      <dt>事件名称</dt>
+                      <dd>新用户复充促销事件</dd>
+                    </div>
+                    <div class="event-field">
+                      <dt>事件编号</dt>
+                      <dd>EVT202608170042</dd>
+                    </div>
+                    <div class="event-field">
+                      <dt>事件分类</dt>
+                      <dd>促销事件</dd>
+                    </div>
+                    <div class="event-field">
+                      <dt>发现时间</dt>
+                      <dd><time datetime="2026-08-17T09:44">2026-08-17 09:44</time></dd>
+                    </div>
+                    <div class="event-field event-field--period">
+                      <dt>影响时间范围</dt>
+                      <dd class="event-field__period"><time datetime="2026-08-17">2026-08-17</time></dd>
+                    </div>
+                    <div class="event-field">
+                      <dt>影响范围</dt>
+                      <dd>中国石化济南莱芜第44加油站充电站</dd>
+                    </div>
+                    <div class="event-field">
+                      <dt>当前状态</dt>
+                      <dd><span class="status-tag status-tag--neutral" id="event-current-status">已复盘</span></dd>
+                    </div>
+                    <div class="event-field">
+                      <dt>关注指标</dt>
+                      <dd>新用户复充转化</dd>
+                    </div>
+                    <div class="event-field event-field--description">
+                      <dt>事件描述</dt><dd>针对完成首次充电的新用户，分析复充时间窗口、电站体验及用户群体构成，评估通过促销激励促进二充、三充转化的机会。</dd>
+                    </div>
+                  </dl>
+
+                  <!-- PRD 3.2：分析完成后展示结论；保留经营风险场景，建议衔接原型的新用户复充活动。 -->
+                  <section class="ai-conclusion event-information__conclusion" aria-labelledby="conclusion-title">
+                    <h3 id="conclusion-title">AI分析结论</h3>
+                    <p>首充后3–7天为新用户复充参考窗口，本站体验正常，用户以私家车为主。预计可促成102名新用户复充，建议结合分析结果生成促销策略。</p>
+                  </section>
+                </div>
+              </section>
+<section class="event-card analysis-card promotion-analysis" id="event-analysis" tabindex="-1" aria-labelledby="analysis-title">
+ <header class="event-card__heading"><span class="section-number metric-number" aria-hidden="true">02</span><h2 id="analysis-title">分析过程</h2><span class="promotion-station"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>中国石化济南莱芜第44加油站充电站</span></span><span class="status-tag status-tag--executing">分析完成</span></header>
+ <div class="promotion-analysis-workspace">
+ <div class="promotion-analysis-grid">
+<section class="analysis-block promotion-panel promotion-timing" aria-labelledby="promotion-timing-title">
+   <header class="analysis-block__heading promotion-panel-heading"><svg class="promotion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></svg><h3 id="promotion-timing-title">转化时机分析</h3><button class="promotion-help" type="button" aria-label="转化时机分析说明" data-promotion-help="针对完成首次充电的用户，分析首次充电后的复充时间窗口，为活动触达时机及后续复充效果观察提供参考。"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M6.3 6a1.7 1.7 0 0 1 3.4 0c0 1.2-1.7 1.3-1.7 2.6"/><circle cx="8" cy="11.2" r=".65" fill="currentColor" stroke="none"/></svg></button></header>
+   
+   <div class="promotion-keyline promotion-stat"><span class="promotion-label">复充周期</span><div class="promotion-value"><span class="metric-number" data-promotion="window">3–7</span><small>天</small></div></div>
+   <div class="promotion-judgement"><h4>分析判断</h4><p>新用户复充参考周期为首充后<b>3~7天</b>，可围绕该时间窗口安排促销触达，重点关注用户二充、三充转化。</p></div>
+  </section>
+<section class="analysis-block promotion-panel" aria-labelledby="promotion-experience-title">
+   <header class="analysis-block__heading promotion-panel-heading"><svg class="promotion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z"/></svg><h3 id="promotion-experience-title">电站体验复核</h3><button class="promotion-help" type="button" aria-label="电站体验复核说明" data-promotion-help="通过电站近期差评变化，判断当前充电体验是否存在明显异常。"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M6.3 6a1.7 1.7 0 0 1 3.4 0c0 1.2-1.7 1.3-1.7 2.6"/><circle cx="8" cy="11.2" r=".65" fill="currentColor" stroke="none"/></svg></button><span class="promotion-status">体验正常</span></header>
+   
+   <div class="promotion-experience-metric promotion-stat"><span class="promotion-label">近7天差评数环比</span><div class="promotion-value"><span class="metric-number" data-promotion="reviewChange">+3.2</span><small>%</small></div></div>
+   <div class="promotion-judgement"><h4>分析判断</h4><p>近7天差评数较前7天上升<b>3.2%</b>，处于正常波动范围，近期未发现差评数量明显异常变化。</p></div>
+  </section>
+<section class="analysis-block promotion-panel" aria-labelledby="promotion-audience-title">
+   <header class="analysis-block__heading promotion-panel-heading"><svg class="promotion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6m2 3a5 5 0 0 1 3 4v2"/></svg><h3 id="promotion-audience-title">用户群体分析</h3><button class="promotion-help" type="button" aria-label="用户群体分析说明" data-promotion-help="分析本站用户群体构成，了解主要服务人群，为促销活动人群选择及活动设计提供参考。"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M6.3 6a1.7 1.7 0 0 1 3.4 0c0 1.2-1.7 1.3-1.7 2.6"/><circle cx="8" cy="11.2" r=".65" fill="currentColor" stroke="none"/></svg></button></header>
+   
+   <div class="promotion-audience" id="promotionAudience" aria-label="本站用户构成"></div>
+   <div class="promotion-judgement"><h4>分析判断</h4><p>本站用户以<b>私家车用户</b>为主，占比61%，网约车用户次之，其他用户占比8%，可作为后续促销活动人群选择的参考。</p></div>
+  </section>
+ </div>
+ <div class="promotion-result-row">
+<section class="analysis-block promotion-panel promotion-estimate" aria-labelledby="promotion-estimate-title">
+   <header class="analysis-block__heading promotion-panel-heading"><svg class="promotion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><path d="m12 12 8-8m-4 0h4v4"/></svg><h3 id="promotion-estimate-title">预计转化人数</h3></header>
+   <div class="promotion-estimate-body"><div class="promotion-estimate-value promotion-value promotion-value--emphasis"><span class="metric-number" data-promotion="expectedUsers">102</span><small>人</small></div></div>
+  </section>
+<section class="ai-conclusion event-information__conclusion promotion-summary" aria-labelledby="promotion-summary-title"><h3 id="promotion-summary-title">AI分析结论</h3><p>本次事件聚焦新用户复充转化场景，复充参考周期为首充后<b>3~7天</b>。本站近7天差评数环比上升<b>3.2%</b>，体验表现正常；用户群体以<b>私家车用户</b>为主，占比<b>61%</b>。结合本次促销活动预估结果，预计可促成<b>102名新用户</b>完成复充转化，可为后续促销策略生成提供参考。</p></section>
+ </div>
+ </div>
+</section>
+
+              <div class="decision-review-grid">
+                <section class="event-card decision-card" id="decision-section" tabindex="-1" aria-labelledby="decision-title">
+                  <header class="event-card__heading">
+                    <span class="section-number metric-number" aria-hidden="true">03</span>
+                    <h2 id="decision-title">决策生成</h2>
+                    <span class="status-tag status-tag--neutral" id="decision-status">已结束</span>
+                  </header>
+                  <div class="decision-body">
+                    <div class="promo-activity-heading">
+                      <img src="./assets/nav-promotion.svg" width="18" height="18" alt="">
+                      <h3 id="promo-activity-title">新用户复充激励活动</h3>
+                    </div>
+                    <dl class="decision-fields" aria-label="促销活动方案">
+                      <div class="decision-field decision-field--wide">
+                        <dt>目标人群</dt>
+                        <dd class="promo-audience"><span id="promo-audience"></span><span class="promo-field-number"><span class="metric-number" id="promo-selected-users"></span><small>人</small></span></dd>
+                      </div>
+                      <div class="decision-field decision-field--divided"><dt>活动预算</dt><dd class="promo-field-number"><span class="metric-number" id="promo-budget"></span><small>元</small></dd></div>
+                      <div class="decision-field"><dt>发券数量</dt><dd class="promo-field-number"><span class="metric-number" id="promo-coupon-count"></span><small>张</small></dd></div>
+                      <div class="decision-field decision-field--wide"><dt>奖励方式</dt><dd class="promo-reward" id="promo-reward"></dd></div>
+                      <div class="decision-field decision-field--wide"><dt>活动周期</dt><dd class="decision-period"><time id="promo-start"></time><span>至</span><time id="promo-end"></time></dd></div>
+                      <div class="decision-field decision-field--wide decision-field--purpose"><dt>活动目标</dt><dd id="promo-goal"></dd></div>
+                    </dl>
+                  </div>
+                </section>
+
+                <section class="event-card execution-card" id="execution-review" tabindex="-1" aria-labelledby="execution-title">
+                  <header class="event-card__heading">
+                    <span class="section-number metric-number" aria-hidden="true">04</span>
+                    <h2 id="execution-title">评估复盘</h2>
+                    <span class="status-tag status-tag--neutral" id="execution-status">已复盘</span>
+                  </header>
+                  <div class="execution-body">
+                    <div class="execution-assessment">
+                      <span class="execution-scope">活动累计效果</span>
+                      <div class="execution-grade"><span id="execution-grade-label">复盘结果</span><strong id="execution-grade">优</strong></div>
+                    </div>
+                    <dl class="execution-metrics" aria-label="促销活动累计指标">
+                      <div class="execution-metric execution-metric--intervene"><dt>用户干预</dt><dd><span class="metric-number" data-execution="interveneCount"></span><span class="execution-unit">人</span></dd><dd class="execution-change"><span>干预率</span><strong data-execution="interveneRate"></strong></dd></div>
+                      <div class="execution-metric execution-metric--redeem"><dt>优惠核销</dt><dd><span class="metric-number" data-execution="redeemAmount"></span><span class="execution-unit">元</span></dd><dd class="execution-change"><span>核销率</span><strong data-execution="redeemRate"></strong></dd></div>
+                      <div class="execution-metric execution-metric--convert"><dt>完成转化</dt><dd><span class="metric-number" data-execution="convertCount"></span><span class="execution-unit">人</span></dd><dd class="execution-change"><span>转化率</span><strong data-execution="convertRate"></strong></dd></div>
+                    </dl>
+                    <figure class="execution-trend" aria-labelledby="execution-trend-title">
+                      <div class="execution-trend__heading"><h3 id="execution-trend-title">活动执行效果</h3><span>当日值</span></div>
+                      <div class="execution-trend__plot" id="execution-trend-plot">
+                        <svg id="execution-trend-svg" role="group" aria-label="每日干预用户数、核销金额与转化用户数"></svg>
+                        <div class="execution-chart-tooltip" id="execution-chart-tooltip" role="tooltip" hidden></div>
+                      </div>
+                      <figcaption class="execution-trend__legend">
+                        <span><svg viewBox="0 0 24 12" aria-hidden="true"><path d="M1 6h22" stroke="#315eef" stroke-width="3"/><circle cx="12" cy="6" r="3" fill="#fff" stroke="#315eef" stroke-width="2"/></svg>干预用户数</span>
+                        <span><svg viewBox="0 0 24 12" aria-hidden="true"><path d="M1 6h22" stroke="#05b37f" stroke-width="3"/><circle cx="12" cy="6" r="3" fill="#fff" stroke="#05b37f" stroke-width="2"/></svg>核销金额</span>
+                        <span><svg viewBox="0 0 24 12" aria-hidden="true"><path d="M1 6h22" stroke="#7c3aed" stroke-width="3"/><circle cx="12" cy="6" r="3" fill="#fff" stroke="#7c3aed" stroke-width="2"/></svg>转化用户数</span>
+                      </figcaption>
+                    </figure>
+                    <section class="ai-conclusion execution-conclusion" aria-labelledby="execution-conclusion-title">
+                      <h3 id="execution-conclusion-title">AI 复盘结论</h3>
+                      <p id="execution-conclusion-text"></p>
+                    </section>
+                  </div>
+                </section>
+              </div>
+            </div>
+
+
+          </div>
+        </main>
+
+        <aside class="event-lifecycle" aria-labelledby="lifecycle-title">
+          <h2 id="lifecycle-title">事件生命周期</h2>
+          <nav aria-labelledby="lifecycle-title">
+            <ol class="lifecycle-list">
+              <li class="lifecycle-step lifecycle-step--active">
+                <a class="lifecycle-link" href="#event-information" aria-current="location">
+                  <span class="lifecycle-step__number metric-number" aria-hidden="true">01</span>
+                  <span class="lifecycle-step__content">
+                    <span class="lifecycle-step__title">事件信息</span>
+                    <time datetime="2026-08-17T09:44">08-17 09:44</time>
+                  </span>
+                </a>
+              </li>
+              <li class="lifecycle-step">
+                <a class="lifecycle-link" href="#event-analysis">
+                  <span class="lifecycle-step__number metric-number" aria-hidden="true">02</span>
+                  <span class="lifecycle-step__content">
+                    <span class="lifecycle-step__title">分析过程</span>
+                    <time datetime="2026-08-17T09:48">08-17 09:48</time>
+                  </span>
+                </a>
+              </li>
+              <li class="lifecycle-step">
+                <a class="lifecycle-link" href="#decision-section">
+                  <span class="lifecycle-step__number metric-number" aria-hidden="true">03</span>
+                  <span class="lifecycle-step__content">
+                    <span class="lifecycle-step__title">决策生成</span>
+                    <time datetime="2026-08-20T09:30">08-20 09:30</time>
+                  </span>
+                </a>
+              </li>
+              <li class="lifecycle-step">
+                <a class="lifecycle-link" href="#execution-review">
+                  <span class="lifecycle-step__number metric-number" aria-hidden="true">04</span>
+                  <span class="lifecycle-step__content">
+                    <span class="lifecycle-step__title">评估复盘</span>
+                    <time datetime="2026-08-20T10:00">08-20 10:00</time>
+                  </span>
+                </a>
+              </li>
+            </ol>
+          </nav>
+        </aside>
+      </div>
+    </div>
+
+
+    <!-- 促销原型的活动方案与累计指标。核销率未提供；趋势以累计示例序列及零起点按日差分，详见 README。 -->
+    <script type="application/json" id="decision-review-data">
+      {
+        "decision": {
+          "status": "COMPLETED",
+          "sceneType": "NEW_USER_RECHARGE",
+          "title": "新用户复充激励活动",
+          "audience": "首充未二充、二充未三充用户",
+          "selectedUsers": 158,
+          "couponCount": 102,
+          "periodStart": "2026-08-20",
+          "periodEnd": "2026-08-27",
+          "budget": 2000,
+          "reward": "服务费 9 折券"
+        },
+        "execution": {
+          "phase": "REVIEWED",
+          "gradeName": "优",
+          "interveneTarget": 158,
+          "interveneCount": 158,
+          "interveneRate": 100.0,
+          "redeemAmount": 1286,
+          "redeemRate": null,
+          "convertCount": 45,
+          "convertRate": 28.5,
+          "trendBasis": "cumulative",
+          "trendInitialValues": {
+            "intervene": 0,
+            "redeemAmount": 0,
+            "convert": 0
+          },
+          "trend": [
+            {
+              "date": "08/20",
+              "intervene": 20,
+              "redeemAmount": 120,
+              "convert": 5
+            },
+            {
+              "date": "08/21",
+              "intervene": 45,
+              "redeemAmount": 260,
+              "convert": 11
+            },
+            {
+              "date": "08/22",
+              "intervene": 68,
+              "redeemAmount": 420,
+              "convert": 17
+            },
+            {
+              "date": "08/23",
+              "intervene": 92,
+              "redeemAmount": 610,
+              "convert": 24
+            },
+            {
+              "date": "08/24",
+              "intervene": 118,
+              "redeemAmount": 790,
+              "convert": 31
+            },
+            {
+              "date": "08/25",
+              "intervene": 136,
+              "redeemAmount": 980,
+              "convert": 37
+            },
+            {
+              "date": "08/26",
+              "intervene": 149,
+              "redeemAmount": 1125,
+              "convert": 42
+            },
+            {
+              "date": "08/27",
+              "intervene": 158,
+              "redeemAmount": 1286,
+              "convert": 45
+            }
+          ]
+        }
+      }
+    </script>
+  <script type="application/json" id="promotion-analysis-data">{"repurchaseDays": [3, 7], "reviewChangePercent": 3.2, "experienceStatus": "体验正常", "expectedConvertedUsers": 102, "audience": [{"name": "私家车用户", "share": 61}, {"name": "网约车用户", "share": 31}, {"name": "其他用户", "share": 8}]}</script>
+</body>
+</html>
